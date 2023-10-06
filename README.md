@@ -23,12 +23,14 @@ This repository will be used for my Advanced Systems Engineering Module.
 ```
 MoveTo X, Y
 Forward X, Y
+PenColor
+Fill
 Clear
 Reset
 Rectangle
 Triangle
 Circle
-PenColor
+
 ```
 
 ## Help
