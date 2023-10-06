@@ -21,7 +21,14 @@ This repository will be used for my Advanced Systems Engineering Module.
 * How to run the program
 * Step-by-step bullets
 ```
-code blocks for commands
+MoveTo X, Y
+Forward X, Y
+Clear
+Reset
+Rectangle
+Triangle
+Circle
+PenColor
 ```
 
 ## Help
