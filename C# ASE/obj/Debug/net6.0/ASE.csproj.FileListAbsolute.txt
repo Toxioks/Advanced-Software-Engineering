@@ -1,0 +1,14 @@
+C:\Users\Lewis\source\repos\ASE\ASE\bin\Debug\net6.0\ASE.exe
+C:\Users\Lewis\source\repos\ASE\ASE\bin\Debug\net6.0\ASE.deps.json
+C:\Users\Lewis\source\repos\ASE\ASE\bin\Debug\net6.0\ASE.runtimeconfig.json
+C:\Users\Lewis\source\repos\ASE\ASE\bin\Debug\net6.0\ASE.dll
+C:\Users\Lewis\source\repos\ASE\ASE\bin\Debug\net6.0\ASE.pdb
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.AssemblyInfoInputs.cache
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.AssemblyInfo.cs
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.dll
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\refint\ASE.dll
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.pdb
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ASE.genruntimeconfig.cache
+C:\Users\Lewis\source\repos\ASE\ASE\obj\Debug\net6.0\ref\ASE.dll
