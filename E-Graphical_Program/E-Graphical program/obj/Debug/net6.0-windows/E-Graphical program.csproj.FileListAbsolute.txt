@@ -1,0 +1,20 @@
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\E-Graphical program.exe
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\E-Graphical program.deps.json
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\E-Graphical program.runtimeconfig.json
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\E-Graphical program.dll
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\E-Graphical program.pdb
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\bin\Debug\net6.0-windows\Nakov.TurtleGraphics.dll
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.csproj.AssemblyReference.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E_Graphical_program.Form1.resources
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.csproj.GenerateResource.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.AssemblyInfoInputs.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.AssemblyInfo.cs
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.csproj.CopyComplete
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.dll
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\refint\E-Graphical program.dll
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.pdb
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E-Graphical program.genruntimeconfig.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\ref\E-Graphical program.dll
+C:\Users\Lewis\source\repos\ASE\E-Graphical_Program\E-Graphical program\obj\Debug\net6.0-windows\E_Graphical_program.Properties.Resources.resources

@@ -1,0 +1,14 @@
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\bin\Debug\net6.0\CommandLineParser.exe
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\bin\Debug\net6.0\CommandLineParser.deps.json
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\bin\Debug\net6.0\CommandLineParser.runtimeconfig.json
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\bin\Debug\net6.0\CommandLineParser.dll
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\bin\Debug\net6.0\CommandLineParser.pdb
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.AssemblyInfoInputs.cache
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.AssemblyInfo.cs
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.dll
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\refint\CommandLineParser.dll
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.pdb
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\CommandLineParser.genruntimeconfig.cache
+C:\Users\Lewis\source\repos\ASE\CommandLineParser\CommandLineParser\obj\Debug\net6.0\ref\CommandLineParser.dll
