@@ -5,17 +5,30 @@ using Nakov.TurtleGraphics;
 
 namespace E_Graphical_program
 {
+    /// <summary>
+    /// This class represents a educational graphical program that uses the Nakov.TurtleGraphics library.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the Form1 class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initializes the turtle graphics panel within Form1 Window.
+        /// </summary>
+        /// <param name="sender"> The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             Turtle.Init(panel4);
         }
+
+        // TODO: Add XML documentation for the following methods.
 
         private void button1_Click(object sender, EventArgs e)
         {
