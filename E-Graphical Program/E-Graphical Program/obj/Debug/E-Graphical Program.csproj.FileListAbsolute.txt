@@ -1,0 +1,10 @@
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\bin\Debug\E-Graphical Program.exe.config
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\bin\Debug\E-Graphical Program.exe
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\bin\Debug\E-Graphical Program.pdb
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E-Graphical Program.csproj.AssemblyReference.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E_Graphical_Program.Properties.Resources.resources
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E-Graphical Program.csproj.GenerateResource.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E-Graphical Program.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E-Graphical Program.exe
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E-Graphical Program.pdb
+C:\Users\Lewis\source\repos\ASE\E-Graphical Program\E-Graphical Program\obj\Debug\E_Graphical_Program.ProgrammingLanguage.resources
