@@ -23,6 +23,8 @@ namespace E_Graphical_Program
             "rectangle",
             "triangle",
             "circle",
+            "pen",
+            "fill",
         };
 
 
@@ -65,6 +67,10 @@ namespace E_Graphical_Program
                     break;
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
+                case "circle":
+                    if (!IsValidCircleParameters(parameters))
+                        throw new InvalidCommandEntryException("Invalid parameters for 'circle' command.");
+                    break;
             }
 
             return true;
@@ -76,6 +82,14 @@ namespace E_Graphical_Program
                 return false;
 
             return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
+        }
+
+        private bool IsValidCircleParameters(string[] parameters)
+        {
+            if (parameters.Length != 1)
+                return false;
+
+            return int.TryParse(parameters[0], out _);
         }
     }
 }

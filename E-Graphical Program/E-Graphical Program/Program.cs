@@ -17,6 +17,7 @@ namespace E_Graphical_Program
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
         }
     }
 }

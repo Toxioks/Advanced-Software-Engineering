@@ -46,15 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandClear.cs" />
+    <Compile Include="CommandDrawCircle.cs" />
+    <Compile Include="CommandDrawRectangle.cs" />
+    <Compile Include="CommandDrawTo.cs" />
+    <Compile Include="CommandDrawTriangle.cs" />
     <Compile Include="CommandEntryList.cs" />
+    <Compile Include="CommandFillMode.cs" />
     <Compile Include="CommandMoveTo.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="CommandPenColor.cs" />
+    <Compile Include="CommandReset.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ICommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

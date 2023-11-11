@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\E-Graphical Program",
+    "\\E-Graphical Program\\E-Graphical Program"
   ],
-  "SelectedNode": "\\E-Graphical Program.sln",
+  "SelectedNode": "\\E-Graphical Program\\E-Graphical Program\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
