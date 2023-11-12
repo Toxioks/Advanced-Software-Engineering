@@ -38,6 +38,7 @@ namespace ASEProject
                 {"drawto", new CommandDrawTo()},
                 {"moveto", new CommandMoveTo()},
                 {"circle", new CommandCircle()},
+                {"clear", new CommandClear()},
             };
         }
 

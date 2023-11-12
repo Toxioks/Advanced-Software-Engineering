@@ -14,7 +14,7 @@ namespace CommandEntryTest
     public class CommandEntryTest
     {
         /// <summary>
-        /// Calls ExecuteCommandEntry method and handles the "DrawTo" command.
+        /// Calls ExecuteCommandEntry method and handles the DrawTo command.
         /// </summary>
         [Fact]
         public void ExecuteCommandEntry_ValidDrawTo()
@@ -32,7 +32,7 @@ namespace CommandEntryTest
         }
 
         /// <summary>
-        /// Calls ExecuteCommandEntry method and handles the "MoveTo" command.
+        /// Calls ExecuteCommandEntry method and handles the MoveTo command.
         /// </summary>
         [Fact]
         public void ExecuteCommandEntry_ValidMoveTo()
@@ -45,11 +45,11 @@ namespace CommandEntryTest
             commandEntry.ExecuteCommandEntry("moveto 150 150");
 
             // Assert
-            Assert.Equal(new PointF(250, 500), commandEntry.GetCurrentPosition());
+            Assert.Equal(new PointF(150, 150), commandEntry.GetCurrentPosition());
         }
 
         /// <summary>
-        /// Calls ExecuteCommandEntry method and handles the "Circle" command.
+        /// Calls ExecuteCommandEntry method and handles the Circle command.
         /// </summary>
         [Fact]
         public void ExecuteCommandEntry_ValidCircle()
@@ -61,6 +61,24 @@ namespace CommandEntryTest
             // Act
             commandEntry.ExecuteCommandEntry("moveto 150 150");
             commandEntry.ExecuteCommandEntry("Circle 55");
+
+            // Assert
+            Assert.Equal(new PointF(150, 150), commandEntry.GetCurrentPosition());
+        }
+
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the Clear command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidClear()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("moveto 150 150");
+            commandEntry.ExecuteCommandEntry("Clear");
 
             // Assert
             Assert.Equal(new PointF(150, 150), commandEntry.GetCurrentPosition());

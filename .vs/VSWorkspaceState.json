@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\E-Graphical Program",
-    "\\E-Graphical Program\\E-Graphical Program"
+    "\\ASEProject-E-Graphical-Program - Main Application",
+    "\\ASEProject-E-Graphical-Program - Main Application\\ASEProject-E-Graphical-Program",
+    "\\ASEProject-E-Graphical-Program - Main Application\\ASEProject-E-Graphical-Program\\ASEProject"
   ],
-  "SelectedNode": "\\E-Graphical Program\\E-Graphical Program\\Form1.cs",
+  "SelectedNode": "\\ASEProject-E-Graphical-Program - Main Application\\ASEProject-E-Graphical-Program\\ASEProject\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASEProject;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -57,6 +58,9 @@ public class CommandLibrary
             case "circle":
                 DrawCircle(parts);
                 break;
+            case "clear":
+                Clear();
+                break;
             default:
                 // Unknown command
                 break;
@@ -110,6 +114,18 @@ public class CommandLibrary
         }
     }
 
+    /// <summary>
+    /// Clears the graphic and returns Pen position to original X & Y
+    /// </summary>
+    public void Clear()
+    {
+        if (graphics != null)
+        {
+
+            graphics.Clear(Color.BlueViolet);
+            currentPenPosition = PointF.Empty;
+        }
+    }
 
 
 

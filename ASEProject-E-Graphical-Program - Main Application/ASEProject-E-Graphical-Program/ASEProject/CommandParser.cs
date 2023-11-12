@@ -25,6 +25,7 @@ namespace ASEProject
             "drawto",
             "moveto",
             "circle",
+            "clear",
         };
 
         /// <summary>
