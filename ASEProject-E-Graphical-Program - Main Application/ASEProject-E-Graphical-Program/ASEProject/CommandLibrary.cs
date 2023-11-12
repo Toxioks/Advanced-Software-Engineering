@@ -51,6 +51,9 @@ public class CommandLibrary
             case "drawto":
                 DrawTo(parts);
                 break;
+            case "moveto":
+                MoveTo(parts);
+                break;
             default:
                 // Unknown command
                 break;
@@ -60,7 +63,7 @@ public class CommandLibrary
     /// <summary>
     /// Drawes a line between the two specified coordinates X & Y.
     /// </summary>
-    /// <param name="parts">An array containing the drawTo command and X & Y coordinates.</param>
+    /// <param name="parts">An array containing the drawTo command's X & Y coordinates.</param>
     public void DrawTo(string[] parts)
     {
         if (parts.Length >= 3 && int.TryParse(parts[1], out int x) && int.TryParse(parts[2], out int y))
@@ -68,6 +71,18 @@ public class CommandLibrary
             PointF endPoint = new PointF(x, y);
             graphics.DrawLine(pen, currentPenPosition, endPoint);
             currentPenPosition = endPoint;
+        }
+    }
+
+    /// <summary>
+    /// Moves to the Pen to specified coordinates X & Y.
+    /// </summary>
+    /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
+    public void MoveTo(string[] parts)
+    {
+        if (parts.Length >= 3 && int.TryParse(parts[1], out int x) && int.TryParse(parts[2], out int y))
+        {
+            currentPenPosition = new PointF(x, y);
         }
     }
 

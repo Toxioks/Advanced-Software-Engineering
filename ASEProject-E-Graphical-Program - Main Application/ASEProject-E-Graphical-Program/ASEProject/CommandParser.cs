@@ -23,6 +23,7 @@ namespace ASEProject
         public List<string> ValidCommandEntry { get; } = new List<string>
         {
             "drawto",
+            "moveto",
         };
 
         /// <summary>
@@ -71,6 +72,10 @@ namespace ASEProject
                     if (!IsValidDrawToParametersEntry(parameters))
                         throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
+                case "moveto":
+                    if (!IsValidMoveToParametersEntry(parameters))
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
+                    break;
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
             }
@@ -89,5 +94,15 @@ namespace ASEProject
             return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
         }
 
+        /// <summary>
+        /// Validates if a the dmoveTo command has required parameters specified. 
+        /// </summary>
+        private bool IsValidMoveToParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 2)
+                return false;
+
+            return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
+        }
     }
 }

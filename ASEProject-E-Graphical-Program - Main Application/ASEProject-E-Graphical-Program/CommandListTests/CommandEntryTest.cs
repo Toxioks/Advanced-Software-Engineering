@@ -14,7 +14,7 @@ namespace CommandEntryTest
     public class CommandEntryTest
     {
         /// <summary>
-        /// Verifies that the ExecuteCommand method correctly handles the "DrawTo" command.
+        /// Calls ExecuteCommandEntry method and handles the "DrawTo" command.
         /// </summary>
         [Fact]
         public void ExecuteCommandEntry_ValidDrawTo()
@@ -24,13 +24,30 @@ namespace CommandEntryTest
             var commandEntry = new CommandLibrary(graphics);
 
             // Act
-            commandEntry.ExecuteCommandEntry("moveto 50 50");
-            commandEntry.ExecuteCommandEntry("drawto 100 100");
+            commandEntry.ExecuteCommandEntry("moveto 150 150");
+            commandEntry.ExecuteCommandEntry("drawto 250 500");
 
             // Assert
-            Assert.Equal(new PointF(100, 100), commandEntry.GetCurrentPosition());
+            Assert.Equal(new PointF(250, 500), commandEntry.GetCurrentPosition());
         }
 
-        
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the "MoveTo" command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidMoveTo()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("moveto 150 150");
+
+            // Assert
+            Assert.Equal(new PointF(250, 500), commandEntry.GetCurrentPosition());
+        }
+
+
     }
 }
