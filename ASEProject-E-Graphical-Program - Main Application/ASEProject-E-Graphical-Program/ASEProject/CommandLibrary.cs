@@ -25,7 +25,7 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Returns the current pen color used for drawing, set within the CommandLibrary Grpahics object.
+    /// Returns the current pen color used for drawing, set within the CommandLibrary Grpahics object. Also used for Unit testing the Pen command.
     /// </summary>
     public Color GetPenColor()
     {
@@ -64,6 +64,9 @@ public class CommandLibrary
                 break;
             case "reset":
                 Reset();
+                break;
+            case "pen":
+                UpdatePenColor(parts);
                 break;
             default:
                 // Unknown command
@@ -139,6 +142,56 @@ public class CommandLibrary
         currentPenPosition = PointF.Empty;
     }
 
+    /// <summary>
+    /// Changes the color of the pen based on the color selected.
+    /// </summary>
+    /// <param name="parts">An array containing the pen command and the colour name.</param>
+    public void UpdatePenColor(string[] parts)
+    {
+        if (parts.Length >= 2)
+        {
+            string colorName = parts[1].ToLower();
+            switch (colorName)
+            {
+                case "black":
+                    pen.Color = Color.Black;
+                    break;
+                case "white":
+                    pen.Color = Color.White;
+                    break;
+                case "red":
+                    pen.Color = Color.Red;
+                    break;
+                case "blue":
+                    pen.Color = Color.Blue;
+                    break;
+                case "green":
+                    pen.Color = Color.Green;
+                    break;
+                case "yellow":
+                    pen.Color = Color.Yellow;
+                    break;
+                case "pink":
+                    pen.Color = Color.HotPink;
+                    break;
+                case "gold":
+                    pen.Color = Color.Gold;
+                    break;
+                case "cyan":
+                    pen.Color = Color.Cyan;
+                    break;
+                case "silver":
+                    pen.Color = Color.Silver;
+                    break;
+                case "brown":
+                    pen.Color = Color.Brown;
+                    break;
+                default:
+                    // Invalid color name
+                    break;
+            }
+        }
+    }
 
 
 

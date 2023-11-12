@@ -27,6 +27,7 @@ namespace ASEProject
             "circle",
             "clear",
             "reset",
+            "pen",
         };
 
         /// <summary>
@@ -81,9 +82,13 @@ namespace ASEProject
                     break;
                 case "circle":
                     if (!IsValidCircleParametersEntry(parameters))
-                        throw new InvalidCommandEntryException("Invalid parameters for 'circle' command.");
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
-                    // Invalid Command
+                case "pen":
+                    if (!IsValidPenParametersEntry(parameters))
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
+                    break;
+                // Invalid Command
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
             }
@@ -123,5 +128,20 @@ namespace ASEProject
 
             return int.TryParse(parameters[0], out _);
         }
+
+        /// <summary>
+        /// Validates if a the pen command has required parameters specified. 
+        /// </summary>
+        private bool IsValidPenParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 1)
+                return false;
+
+            string color = parameters[0].ToLower();
+            return color == "red" || color == "white" || color == "blue" || color == "black" || color == "yellow" || color == "Cyan" || color == "Silver" || color == "pink" || color == "gold" || color == "brown";
+        }
+
+              
     }
+
 }

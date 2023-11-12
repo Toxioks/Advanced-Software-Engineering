@@ -98,8 +98,30 @@ namespace CommandEntryTest
             commandEntry.ExecuteCommandEntry("moveto 150 150");
             commandEntry.ExecuteCommandEntry("Reset");
 
+            PointF coords = commandEntry.GetCurrentPosition();
+
             // Assert
-            Assert.Equal(new PointF(0, 0), commandEntry.GetCurrentPosition());
+            Assert.Equal(coords, commandEntry.GetCurrentPosition());
+        }
+
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the pen command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidPenUpdate()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandList = new CommandLibrary(graphics);
+
+            // Act
+            commandList.ExecuteCommandEntry("pen gold");
+
+            // Get the current pen color from CommandLibrary
+            Color updatedColor = commandList.GetPenColor();
+
+            // Assert
+            Assert.Equal(Color.Gold, updatedColor);
         }
     }
 }

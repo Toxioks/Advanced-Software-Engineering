@@ -40,6 +40,7 @@ namespace ASEProject
                 {"circle", new CommandCircle()},
                 {"clear", new CommandClear()},
                 {"reset", new CommandReset()},
+                {"pen", new CommandPenColor() }
             };
         }
 
