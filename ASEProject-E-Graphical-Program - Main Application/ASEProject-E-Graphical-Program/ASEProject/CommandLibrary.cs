@@ -54,6 +54,9 @@ public class CommandLibrary
             case "moveto":
                 MoveTo(parts);
                 break;
+            case "circle":
+                DrawCircle(parts);
+                break;
             default:
                 // Unknown command
                 break;
@@ -75,9 +78,9 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Moves to the Pen to specified coordinates X & Y.
+    /// Draw's a circle at the current pen position.
     /// </summary>
-    /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
+    /// <param name="parts">An array containing the circle command's created using the specified radius</param>
     public void MoveTo(string[] parts)
     {
         if (parts.Length >= 3 && int.TryParse(parts[1], out int x) && int.TryParse(parts[2], out int y))
@@ -85,6 +88,36 @@ public class CommandLibrary
             currentPenPosition = new PointF(x, y);
         }
     }
+
+    /// <summary>
+    /// Moves to the Pen to specified coordinates X & Y.
+    /// </summary>
+    /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
+    public void DrawCircle(string[] parts)
+    {
+        if (parts.Length >= 2 && int.TryParse(parts[1], out int radius))
+        {
+            float diameter = radius * 2;
+            RectangleF rect = new RectangleF(currentPenPosition.X, currentPenPosition.Y, diameter, diameter);
+            if (FillModeOn)
+            {
+                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
+                {
+                    graphics.FillEllipse(pen.Brush, rect);
+                }
+            }
+            graphics.DrawEllipse(pen, Rectangle.Round(rect));
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     /// <summary>
     /// Gets or sets the fill mode for drawings. If true, the drawing will be filled. If false, the drawing will be outlined.

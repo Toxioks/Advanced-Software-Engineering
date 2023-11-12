@@ -36,6 +36,8 @@ namespace ASEProject
             commandLibrary = new Dictionary<string, ICommand>
             {
                 {"drawto", new CommandDrawTo()},
+                {"moveto", new CommandMoveTo()},
+                {"circle", new CommandCircle()},
             };
         }
 
@@ -52,7 +54,7 @@ namespace ASEProject
                 }
                 catch (CustomInvalidCommandException ex)
                 {
-                    MessageBox.Show($"Invalid Command: {ex.Message}", "Invalid Command", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error: Command Invalid: {ex.Message}", "Invalid Command", MessageBoxButtons.OK);
                 }
             }
         }
@@ -61,27 +63,23 @@ namespace ASEProject
             string[] commands = commandText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string command in commands)
             {
-                string trimmedCommand = command.Trim();
-                Console.WriteLine($"Executing command: {trimmedCommand}");
+                string shortenedCommand = command.Trim();
+                Console.WriteLine($"Error: Command Invalid: {shortenedCommand}");
 
-                if (commandParser.IsValidCommandEntry(trimmedCommand) && commandParser.HasValidParametersEntry(trimmedCommand))
+                if (commandParser.IsValidCommandEntry(shortenedCommand) && commandParser.HasValidParametersEntry(shortenedCommand))
                 {
-                    string[] parts = trimmedCommand.Split(' ');
+                    string[] parts = shortenedCommand.Split(' ');
                     string commandName = parts[0].ToLower();
 
                     if (commandLibrary.ContainsKey(commandName))
                     {
                         commandLibrary[commandName].Execute(commandEntryList, parts);
-                        Console.WriteLine($"{trimmedCommand} command executed.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Unknown command: {trimmedCommand}");
+                        Console.WriteLine($"{shortenedCommand} command successful.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid command: {trimmedCommand}");
+                    Console.WriteLine($"Error: Command Invalid: {shortenedCommand}");
                 }
             }
         }
@@ -98,7 +96,7 @@ namespace ASEProject
                 }
                 catch (CustomInvalidCommandException ex)
                 {
-                    MessageBox.Show($"Invalid Command: {ex.Message}", "Invalid Command", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error: Command Invalid: {ex.Message}", "Invalid Command", MessageBoxButtons.OK);
                 }
             }
         }
@@ -112,13 +110,13 @@ namespace ASEProject
                 {
                     try
                     {
-                        string fileName = openFileDialog.FileName;
-                        string fileContent = File.ReadAllText(fileName);
+                        string programName = openFileDialog.FileName;
+                        string fileContent = File.ReadAllText(programName);
                         InputProgramCode.Text = fileContent;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error opening the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error: Opening File: {ex.Message}", "Error", MessageBoxButtons.OK);
                     }
                 }
             }
@@ -133,12 +131,12 @@ namespace ASEProject
                 {
                     try
                     {
-                        string fileName = saveFileDialog.FileName;
-                        File.WriteAllText(fileName, InputProgramCode.Text);
+                        string programName = saveFileDialog.FileName;
+                        File.WriteAllText(programName, InputProgramCode.Text);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error saving the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error: Saving File: {ex.Message}", "Error", MessageBoxButtons.OK);
                     }
                 }
             }

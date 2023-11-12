@@ -48,6 +48,23 @@ namespace CommandEntryTest
             Assert.Equal(new PointF(250, 500), commandEntry.GetCurrentPosition());
         }
 
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the "Circle" command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidCircle()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("moveto 150 150");
+            commandEntry.ExecuteCommandEntry("Circle 55");
+
+            // Assert
+            Assert.Equal(new PointF(150, 150), commandEntry.GetCurrentPosition());
+        }
 
     }
 }

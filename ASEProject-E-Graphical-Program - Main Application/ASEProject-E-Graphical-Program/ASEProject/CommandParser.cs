@@ -24,6 +24,7 @@ namespace ASEProject
         {
             "drawto",
             "moveto",
+            "circle",
         };
 
         /// <summary>
@@ -76,6 +77,11 @@ namespace ASEProject
                     if (!IsValidMoveToParametersEntry(parameters))
                         throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
+                case "circle":
+                    if (!IsValidCircleParametersEntry(parameters))
+                        throw new InvalidCommandEntryException("Invalid parameters for 'circle' command.");
+                    break;
+                    // Invalid Command
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
             }
@@ -95,7 +101,7 @@ namespace ASEProject
         }
 
         /// <summary>
-        /// Validates if a the dmoveTo command has required parameters specified. 
+        /// Validates if a the moveTo command has required parameters specified. 
         /// </summary>
         private bool IsValidMoveToParametersEntry(string[] parameters)
         {
@@ -103,6 +109,17 @@ namespace ASEProject
                 return false;
 
             return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
+        }
+
+        /// <summary>
+        /// Validates if a the circle command has required parameters specified. 
+        /// </summary>
+        private bool IsValidCircleParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 1)
+                return false;
+
+            return int.TryParse(parameters[0], out _);
         }
     }
 }
