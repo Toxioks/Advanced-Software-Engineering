@@ -68,6 +68,9 @@ public class CommandLibrary
             case "pen":
                 UpdatePenColor(parts);
                 break;
+            case "fill":
+                UpdateFillMode(parts);
+                break;
             default:
                 // Unknown command
                 break;
@@ -193,6 +196,33 @@ public class CommandLibrary
         }
     }
 
+    /// <summary>
+    /// Changes the fill mode on or off. References FillModeTrue.
+    /// </summary>
+    /// <param name="parts">An array containing the Fill command.</param>
+    public void UpdateFillMode(string[] parts)
+    {
+        if (parts.Length >= 2)
+        {
+            string fillMode = parts[1].ToLower();
+
+            try
+            {
+                if (fillMode == "on")
+                {
+                    FillModeTrue = true;
+                }
+                else if (fillMode == "off")
+                {
+                    FillModeTrue = false;
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine($"Error: UpdateFillMode Failed");
+            }
+        }
+    }
 
 
 

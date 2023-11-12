@@ -3,6 +3,7 @@ using System.Drawing;
 using Xunit;
 using ASEProject; 
 using System.Reflection;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// This class provides Unit testing using the CommandEntryTests class, 
@@ -122,6 +123,27 @@ namespace CommandEntryTest
 
             // Assert
             Assert.Equal(Color.Gold, updatedColor);
+
+
+        }
+
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the Fill command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidFillUpdate()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandList = new CommandLibrary(graphics);
+
+            // Act
+            commandList.ExecuteCommandEntry("fill off");
+
+
+            //To Do
+
+
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ASEProject
             "clear",
             "reset",
             "pen",
+            "fill",
         };
 
         /// <summary>
@@ -88,7 +89,11 @@ namespace ASEProject
                     if (!IsValidPenParametersEntry(parameters))
                         throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
-                // Invalid Command
+                case "fill":
+                    if (!IsValidFillParametersEntry(parameters))
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
+                    break;
+                // Invalid Command Exception
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
             }
@@ -141,7 +146,19 @@ namespace ASEProject
             return color == "red" || color == "white" || color == "blue" || color == "black" || color == "yellow" || color == "Cyan" || color == "Silver" || color == "pink" || color == "gold" || color == "brown";
         }
 
-              
+        /// <summary>
+        /// Validates if a the fill command has required parameters specified. 
+        /// </summary>
+        private bool IsValidFillParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 1)
+                return false;
+
+            string fillMode = parameters[0].ToLower();
+            return fillMode == "off" || fillMode == "on";
+        }
+
+
     }
 
 }
