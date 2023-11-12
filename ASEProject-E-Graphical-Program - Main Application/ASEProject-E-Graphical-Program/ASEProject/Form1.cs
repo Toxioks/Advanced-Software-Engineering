@@ -39,6 +39,7 @@ namespace ASEProject
                 {"moveto", new CommandMoveTo()},
                 {"circle", new CommandCircle()},
                 {"clear", new CommandClear()},
+                {"reset", new CommandReset()},
             };
         }
 

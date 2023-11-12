@@ -9,7 +9,7 @@ namespace ASEProject
     /// <summary>
     /// Represents the circle command class.
     /// </summary>
-    public class CommandClear : ICommand
+    public class CommandReset : ICommand
     {
         /// <summary>
         /// Calls and executes the command clear from the CommandLibrary.
@@ -18,7 +18,10 @@ namespace ASEProject
         /// <param name="parameters">Not required for this command.</param>
         public void Execute(CommandLibrary commandEntryList, string[] parameters)
         {
-            commandEntryList.Clear();
+            if (parameters.Length >= 2 && int.TryParse(parameters[1], out int radius))
+            {
+                commandEntryList.Reset();
+            }
         }
     }
 }

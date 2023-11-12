@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// Represents the Command Library class for executing a list/library of commands using a graphical object.
@@ -61,6 +62,9 @@ public class CommandLibrary
             case "clear":
                 Clear();
                 break;
+            case "reset":
+                Reset();
+                break;
             default:
                 // Unknown command
                 break;
@@ -103,7 +107,7 @@ public class CommandLibrary
         {
             float diameter = radius * 2;
             RectangleF rect = new RectangleF(currentPenPosition.X, currentPenPosition.Y, diameter, diameter);
-            if (FillModeOn)
+            if (FillModeTrue)
             {
                 if (pen.Brush != null && pen.Brush != Brushes.Transparent)
                 {
@@ -115,16 +119,24 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Clears the graphic and returns Pen position to original X & Y
+    /// Clears the graphic and returns Pen position to original X & Y coordinates.
     /// </summary>
     public void Clear()
     {
         if (graphics != null)
         {
 
-            graphics.Clear(Color.BlueViolet);
+            graphics.Clear(Color.WhiteSmoke);
             currentPenPosition = PointF.Empty;
         }
+    }
+
+    /// <summary>
+    /// Resets the current position to the original X & Y coordinates
+    /// </summary>
+    public void Reset()
+    {
+        currentPenPosition = PointF.Empty;
     }
 
 
@@ -138,7 +150,7 @@ public class CommandLibrary
     /// <summary>
     /// Gets or sets the fill mode for drawings. If true, the drawing will be filled. If false, the drawing will be outlined.
     /// </summary>
-    internal bool FillModeOn { get; set; } = true;
+    internal bool FillModeTrue { get; set; } = true;
 
     public PointF GetCurrentPosition()
     {
