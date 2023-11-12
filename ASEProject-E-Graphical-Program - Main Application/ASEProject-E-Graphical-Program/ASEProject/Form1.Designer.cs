@@ -35,7 +35,10 @@
             InputProgramCode = new TextBox();
             GraphicsBox = new PictureBox();
             InputCommandBox = new TextBox();
+            pictureBox1 = new PictureBox();
+            ButtonHelp = new Button();
             ((System.ComponentModel.ISupportInitialize)GraphicsBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // ButtonOpen
@@ -110,6 +113,28 @@
             InputCommandBox.Size = new Size(675, 39);
             InputCommandBox.TabIndex = 6;
             InputCommandBox.Text = "Enter command here";
+            InputCommandBox.Enter += InputCommandBox_Enter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.learning_logo__1_;
+            pictureBox1.Location = new Point(1343, 864);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(450, 67);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
+            // ButtonHelp
+            // 
+            ButtonHelp.Location = new Point(1258, 867);
+            ButtonHelp.Margin = new Padding(6);
+            ButtonHelp.Name = "ButtonHelp";
+            ButtonHelp.Size = new Size(128, 49);
+            ButtonHelp.TabIndex = 8;
+            ButtonHelp.Text = "Help";
+            ButtonHelp.UseVisualStyleBackColor = true;
+            ButtonHelp.Click += ButtonHelp_Click;
             // 
             // Form1
             // 
@@ -117,6 +142,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(42, 66, 92);
             ClientSize = new Size(1748, 946);
+            Controls.Add(ButtonHelp);
+            Controls.Add(pictureBox1);
             Controls.Add(InputCommandBox);
             Controls.Add(GraphicsBox);
             Controls.Add(InputProgramCode);
@@ -130,6 +157,7 @@
             Name = "Form1";
             Text = "Educational Programming Language";
             ((System.ComponentModel.ISupportInitialize)GraphicsBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -143,5 +171,7 @@
         private TextBox InputProgramCode;
         private PictureBox GraphicsBox;
         private TextBox InputCommandBox;
+        private PictureBox pictureBox1;
+        private Button ButtonHelp;
     }
 }

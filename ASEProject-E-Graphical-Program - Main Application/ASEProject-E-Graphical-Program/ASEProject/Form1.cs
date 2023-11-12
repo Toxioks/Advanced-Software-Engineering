@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ASEProject
 {
@@ -9,6 +10,9 @@ namespace ASEProject
     public partial class Form1 : Form
     {
 
+        /// <summary>
+        /// Initializes the form and the command dictionary.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -24,13 +28,14 @@ namespace ASEProject
         private CommandLibrary commandEntryList;
         private CommandParser commandParser;
 
-        public class CustomInvalidCommandException : Exception
+        public class CustomInvalidCommandEntryException : Exception
         {
-            public CustomInvalidCommandException() { }
-            public CustomInvalidCommandException(string message) : base(message) { }
-            public CustomInvalidCommandException(string message, Exception inner) : base(message, inner) { }
+            public CustomInvalidCommandEntryException(string message) : base(message) { }
         }
 
+        /// <summary>
+        /// Initializes the command dictionary with all the commands set.
+        /// </summary>
         private void InitializeCommandDictionary()
         {
             commandLibrary = new Dictionary<string, ICommand>
@@ -46,6 +51,9 @@ namespace ASEProject
             };
         }
 
+        /// <summary>
+        /// Handles the click event for the run button. Executes the command when the user presses the run button.
+        /// </summary>
         private void ButtonRun_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Run button clicked");
@@ -57,12 +65,16 @@ namespace ASEProject
                 {
                     ExecuteCommandFromTextBox(line);
                 }
-                catch (CustomInvalidCommandException ex)
+                catch (CustomInvalidCommandEntryException ex)
                 {
                     MessageBox.Show($"Error: Command Invalid: {ex.Message}", "Invalid Command", MessageBoxButtons.OK);
                 }
             }
         }
+
+        /// <summary>
+        /// Handles the click event for the run button. Executes the command when the user presses enter.
+        /// </summary>
         private void ExecuteCommandFromTextBox(string commandText)
         {
             string[] commands = commandText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
@@ -89,6 +101,9 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Handles the key press event for the command box. Executes the command when the user presses enter.
+        /// </summary>
         private void CommandBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -99,13 +114,16 @@ namespace ASEProject
                     ExecuteCommandFromTextBox(InputCommandBox.Text);
                     InputCommandBox.Clear();
                 }
-                catch (CustomInvalidCommandException ex)
+                catch (CustomInvalidCommandEntryException ex)
                 {
                     MessageBox.Show($"Error: Command Invalid: {ex.Message}", "Invalid Command", MessageBoxButtons.OK);
                 }
             }
         }
 
+        /// <summary>
+        /// Handles the click event for the open button. Opens a file dialog and loads the program code from a file.
+        /// </summary>
         private void ButtonOpen_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -127,6 +145,9 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Handled click event for the save button. Opens a save file dialog and saves the program code to a file.
+        /// </summary>
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
@@ -145,6 +166,34 @@ namespace ASEProject
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Opens the help link in the default browser of the user.
+        /// </summary>
+        private void ButtonHelp_Click(object sender, EventArgs e)
+        {
+            Process openLink = new Process();
+
+            try
+            {
+                openLink.StartInfo.UseShellExecute = true;
+                openLink.StartInfo.FileName = "https://github.com/Toxioks/Advanced-Software-Engineering";
+                openLink.StartInfo.CreateNoWindow = true;
+                openLink.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Removes preet text from the command box when the user clicks on it.
+        /// </summary>
+        private void InputCommandBox_Enter(object sender, EventArgs e)
+        {
+            InputCommandBox.Clear();
         }
     }
 }
