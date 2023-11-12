@@ -42,6 +42,7 @@ namespace ASEProject
                 {"reset", new CommandReset()},
                 {"pen", new CommandPenColor()},
                 {"fill", new CommandFill()},
+                {"rectangle", new CommandRectangle()},
             };
         }
 

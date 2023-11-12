@@ -113,13 +113,13 @@ namespace CommandEntryTest
         {
             // Arrange
             var graphics = Graphics.FromImage(new Bitmap(1, 1));
-            var commandList = new CommandLibrary(graphics);
+            var commandEntry = new CommandLibrary(graphics);
 
             // Act
-            commandList.ExecuteCommandEntry("pen gold");
+            commandEntry.ExecuteCommandEntry("pen gold");
 
             // Get the current pen color from CommandLibrary
-            Color updatedColor = commandList.GetPenColor();
+            Color updatedColor = commandEntry.GetPenColor();
 
             // Assert
             Assert.Equal(Color.Gold, updatedColor);
@@ -135,15 +135,33 @@ namespace CommandEntryTest
         {
             // Arrange
             var graphics = Graphics.FromImage(new Bitmap(1, 1));
-            var commandList = new CommandLibrary(graphics);
+            var commandEntry = new CommandLibrary(graphics);
 
             // Act
-            commandList.ExecuteCommandEntry("fill off");
+            commandEntry.ExecuteCommandEntry("fill off");
 
 
             //To Do
 
+        }
 
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the Rectangle command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidRectangle()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("moveto 50 50");
+            commandEntry.ExecuteCommandEntry("rectangle 100 100");
+
+
+            // Assert
+            Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
         }
     }
 }

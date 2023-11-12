@@ -29,6 +29,7 @@ namespace ASEProject
             "reset",
             "pen",
             "fill",
+            "rectangle",
         };
 
         /// <summary>
@@ -93,6 +94,10 @@ namespace ASEProject
                     if (!IsValidFillParametersEntry(parameters))
                         throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
+                case "rectangle":
+                    if (!IsValidRectangleParametersEntry(parameters))
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
+                    break;
                 // Invalid Command Exception
                 default:
                     throw new InvalidCommandEntryException($"Unknown command: {action}");
@@ -154,10 +159,20 @@ namespace ASEProject
             if (parameters.Length != 1)
                 return false;
 
-            string fillMode = parameters[0].ToLower();
-            return fillMode == "off" || fillMode == "on";
+            string fillModeState = parameters[0].ToLower();
+            return fillModeState == "off" || fillModeState == "on";
         }
 
+        /// <summary>
+        /// Validates if a the rectangle command has required parameters specified. 
+        /// </summary>
+        private bool IsValidRectangleParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 2)
+                return false;
+
+            return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
+        }
 
     }
 

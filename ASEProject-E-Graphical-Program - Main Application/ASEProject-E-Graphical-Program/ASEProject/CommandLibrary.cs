@@ -71,6 +71,9 @@ public class CommandLibrary
             case "fill":
                 UpdateFillMode(parts);
                 break;
+            case "rectangle":
+                DrawRectangle(parts);
+                break;
             default:
                 // Unknown command
                 break;
@@ -92,7 +95,7 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Draw's a circle at the current pen position.
+    /// Draw's a circle at the current pen position using the input radius
     /// </summary>
     /// <param name="parts">An array containing the circle command's created using the specified radius</param>
     public void MoveTo(string[] parts)
@@ -221,6 +224,26 @@ public class CommandLibrary
             {
                 Console.WriteLine($"Error: UpdateFillMode Failed");
             }
+        }
+    }
+
+    /// <summary>
+    /// Draws a rectangle at the with the input X & Y.
+    /// </summary>
+    /// <param name="parts">An array containing the Rectangle command's specified X & Y input.</param>
+    public void DrawRectangle(string[] parts)
+    {
+        if (parts.Length >= 3 && int.TryParse(parts[1], out int width) && int.TryParse(parts[2], out int height))
+        {
+            RectangleF rect = new RectangleF(currentPenPosition.X, currentPenPosition.Y, width, height);
+            if (FillModeTrue)
+            {
+                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
+                {
+                    graphics.FillRectangle(pen.Brush, rect);
+                }
+            }
+            graphics.DrawRectangle(pen, Rectangle.Round(rect));
         }
     }
 
