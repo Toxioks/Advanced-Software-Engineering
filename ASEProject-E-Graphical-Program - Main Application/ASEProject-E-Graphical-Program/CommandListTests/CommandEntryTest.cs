@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 /// this class consists of unit tests for the CommandLibraryList class in the ASEProject namespace.
 /// </summary>
 
-namespace CommandEntryTest
+namespace ApplicationTesting
 {
     public class CommandEntryTest
     {

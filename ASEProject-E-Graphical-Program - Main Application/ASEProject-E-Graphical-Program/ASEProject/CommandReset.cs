@@ -21,6 +21,7 @@ namespace ASEProject
             if (parameters.Length >= 2 && int.TryParse(parameters[1], out int radius))
             {
                 commandEntryList.Reset();
+
             }
         }
     }

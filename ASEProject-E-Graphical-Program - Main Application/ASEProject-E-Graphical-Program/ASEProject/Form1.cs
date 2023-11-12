@@ -195,5 +195,13 @@ namespace ASEProject
         {
             InputCommandBox.Clear();
         }
+
+        private void Coordinates_updated(object sender, EventArgs e)
+        {
+            string Coordinates_updated = Coordinates.Text;
+            Coordinates.Text = commandEntryList.GetCurrentPosition().ToString();
+
+
+        }
     }
 }

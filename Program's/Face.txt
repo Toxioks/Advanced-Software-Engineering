@@ -1,0 +1,8 @@
+moveto 250 100
+circle 75
+moveto 550 100
+circle 75
+moveto 425 300
+circle 50
+moveto 250 500
+rectangle 450 125

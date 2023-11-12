@@ -37,6 +37,7 @@
             InputCommandBox = new TextBox();
             pictureBox1 = new PictureBox();
             ButtonHelp = new Button();
+            Coordinates = new TextBox();
             ((System.ComponentModel.ISupportInitialize)GraphicsBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -118,7 +119,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.learning_logo__1_;
-            pictureBox1.Location = new Point(1343, 864);
+            pictureBox1.Location = new Point(1344, 867);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(450, 67);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -136,12 +137,21 @@
             ButtonHelp.UseVisualStyleBackColor = true;
             ButtonHelp.Click += ButtonHelp_Click;
             // 
+            // Coordinates
+            // 
+            Coordinates.Location = new Point(1577, 820);
+            Coordinates.Name = "Coordinates";
+            Coordinates.Size = new Size(154, 35);
+            Coordinates.TabIndex = 9;
+            Coordinates.TextChanged += Coordinates_updated;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(42, 66, 92);
             ClientSize = new Size(1748, 946);
+            Controls.Add(Coordinates);
             Controls.Add(ButtonHelp);
             Controls.Add(pictureBox1);
             Controls.Add(InputCommandBox);
@@ -173,5 +183,6 @@
         private TextBox InputCommandBox;
         private PictureBox pictureBox1;
         private Button ButtonHelp;
+        private TextBox Coordinates;
     }
 }

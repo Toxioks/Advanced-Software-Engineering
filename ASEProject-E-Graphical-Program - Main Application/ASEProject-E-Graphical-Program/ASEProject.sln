@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASEProject", "ASEProject\ASEProject.csproj", "{0A7D479D-1825-483A-A5E4-F11FA7E4E159}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandEntryTesting", "CommandListTests\CommandEntryTesting.csproj", "{0414F3F4-1D02-4A36-9990-F792D47E11B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTesting", "CommandListTests\ApplicationTesting.csproj", "{0414F3F4-1D02-4A36-9990-F792D47E11B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
