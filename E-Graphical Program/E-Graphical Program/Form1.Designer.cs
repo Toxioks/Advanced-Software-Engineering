@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.CommandProgramBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.ProgramOutputCanvas = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.ButtonClickOpen = new System.Windows.Forms.Button();
             this.ButtonClickSave = new System.Windows.Forms.Button();
@@ -42,10 +42,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.CommandInputTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.DrawingCanvas = new System.Windows.Forms.Panel();
+            this.DrawingCanvas = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawingCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -56,8 +57,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.CommandProgramBox);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.ProgramOutputCanvas);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -65,6 +66,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(840, 1080);
             this.panel2.TabIndex = 3;
+            // 
+            // CommandProgramBox
+            // 
+            this.CommandProgramBox.Location = new System.Drawing.Point(10, 199);
+            this.CommandProgramBox.Multiline = true;
+            this.CommandProgramBox.Name = "CommandProgramBox";
+            this.CommandProgramBox.Size = new System.Drawing.Size(820, 869);
+            this.CommandProgramBox.TabIndex = 4;
+            this.CommandProgramBox.Text = "Enter program code here\r\n";
             // 
             // label2
             // 
@@ -76,15 +86,6 @@
             this.label2.Size = new System.Drawing.Size(114, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "Program";
-            // 
-            // ProgramOutputCanvas
-            // 
-            this.ProgramOutputCanvas.BackColor = System.Drawing.Color.MintCream;
-            this.ProgramOutputCanvas.Location = new System.Drawing.Point(10, 190);
-            this.ProgramOutputCanvas.Name = "ProgramOutputCanvas";
-            this.ProgramOutputCanvas.Size = new System.Drawing.Size(820, 880);
-            this.ProgramOutputCanvas.TabIndex = 2;
-            this.ProgramOutputCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.ProgramOutputCanvas_Paint);
             // 
             // panel4
             // 
@@ -188,12 +189,12 @@
             // 
             // DrawingCanvas
             // 
-            this.DrawingCanvas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.DrawingCanvas.Dock = System.Windows.Forms.DockStyle.Right;
-            this.DrawingCanvas.Location = new System.Drawing.Point(840, 0);
+            this.DrawingCanvas.BackColor = System.Drawing.Color.MintCream;
+            this.DrawingCanvas.Location = new System.Drawing.Point(858, 10);
             this.DrawingCanvas.Name = "DrawingCanvas";
-            this.DrawingCanvas.Size = new System.Drawing.Size(1080, 1080);
+            this.DrawingCanvas.Size = new System.Drawing.Size(1050, 1060);
             this.DrawingCanvas.TabIndex = 4;
+            this.DrawingCanvas.TabStop = false;
             // 
             // Form1
             // 
@@ -211,6 +212,7 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawingCanvas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -227,9 +229,9 @@
         private System.Windows.Forms.Button ButtonClickOpen;
         private System.Windows.Forms.Button ButtonClickSave;
         private System.Windows.Forms.TextBox CommandInputTextbox;
-        private System.Windows.Forms.Panel ProgramOutputCanvas;
-        private System.Windows.Forms.Panel DrawingCanvas;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox DrawingCanvas;
+        private System.Windows.Forms.TextBox CommandProgramBox;
     }
 }
 

@@ -14,27 +14,26 @@ namespace E_Graphical_Program
 {
     public partial class Form1 : Form
     {
-      
-        private CommandParser commandParser;
-        private CommandEntryList commandEntryList;
-        private Dictionary<string, ICommand> commandDictionary;
-
         public Form1()
         {
             InitializeComponent();
             commandEntryList = new CommandEntryList(DrawingCanvas.CreateGraphics());
             Graphics graphics = DrawingCanvas.CreateGraphics();
+            commandParser = new CommandParser();
             CommandInputTextbox.KeyPress += CommandInputTextbox_KeyPress;
-            InitializeCommandDictionary();
+            InitializeCommandLibrary();
             ButtonClickOpen.Click += ButtonClickOpen_Click;
             ButtonClickSave.Click += ButtonClickSave_Click;
-
-
         }
 
-        private void InitializeCommandDictionary()
+        private CommandParser commandParser;
+        private CommandEntryList commandEntryList;
+        private Dictionary<string, ICommand> commandLibrary;
+
+
+        private void InitializeCommandLibrary()
         {
-            commandDictionary = new Dictionary<string, ICommand>
+            commandLibrary = new Dictionary<string, ICommand>
             {
                 {"moveto", new CommandMoveTo()},
                 {"drawto", new CommandDrawTo()},
@@ -46,8 +45,8 @@ namespace E_Graphical_Program
         private void ButtonClickRun_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Event: Run Button Clicked");
-            string CommandInput = CommandInputTextbox.Text;
-            string[] CommandLine = CommandInput.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string CommandProgramBox = CommandProgramBox.Text;
+            string[] CommandLine = CommandProgramBox.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string line in CommandLine)
             {
                 try
@@ -91,9 +90,9 @@ namespace E_Graphical_Program
                     string[] parts = commandTrimmed.Split(' ');
                     string commandName = parts[0].ToLower();
 
-                    if (commandDictionary.ContainsKey(commandName))
+                    if (commandLibrary.ContainsKey(commandName))
                     {
-                        commandDictionary[commandName].Execute(commandEntryList, parts);
+                        commandLibrary[commandName].Execute(commandEntryList, parts);
                         Console.WriteLine($"{commandTrimmed} command executed.");
                     }
                     else
@@ -173,11 +172,5 @@ namespace E_Graphical_Program
         }
 
 
-        private void ProgramOutputCanvas_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-       
     }
 }

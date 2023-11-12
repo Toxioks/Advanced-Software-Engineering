@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_Graphical_Program
 {
-    /// <summary>
-    /// Represents a class for executing a list of drawing commands using a Graphics object and a Pen.
-    /// </summary>
+    
     public class CommandEntryList
     {
         private Graphics graphics;
