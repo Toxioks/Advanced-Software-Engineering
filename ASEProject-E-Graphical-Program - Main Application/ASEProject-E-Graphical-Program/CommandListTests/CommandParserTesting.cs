@@ -16,7 +16,7 @@ namespace ApplicationTesting
     public class CommandParserTesting
     {
         /// <summary>
-        /// Verifies that CommandParser.IsValidCommandEntry correctly identifies a validated command.
+        /// Verifies that <see cref="CommandParser.IsValidCommandEntry"/> correctly identifies a validated command.
         /// </summary>
         [Fact]
         public void IsValidCommandEntry_SuccessfulCommand()
@@ -33,7 +33,7 @@ namespace ApplicationTesting
         }
 
         /// <summary>
-        /// Verifies that CommandParser.IsValidCommand identifies an invalid command and throws an InvalidCommandEntryException
+        /// Verifies that <see cref="CommandParser.IsValidCommandEntry"/> identifies an invalid command and throws an InvalidCommandEntryException
         /// </summary>
         [Fact]
         public void IsValidCommandEntry_InvalidCommand()
@@ -51,6 +51,9 @@ namespace ApplicationTesting
             });
         }
 
+        /// <summary>
+        /// Verifies that <see cref="CommandParser.HasValidParametersEntry"/> identifies an valid parameter entry.
+        ///  </summary>
         [Fact]
         public void HasValidParameterEntry_Successfull()
         {
@@ -63,6 +66,25 @@ namespace ApplicationTesting
             // Assert
             bool hasValidParametersEntry = parser.HasValidParametersEntry(validCommandEntry);
             Assert.True(hasValidParametersEntry);
+        }
+
+        /// <summary>
+        /// Verifies that <see cref="CommandParser.HasValidParametersEntry"/> identifies an invalid parameter entry.
+        ///  </summary>
+        [Fact]
+        public void HasValidParameterEntry_Failure()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+
+            // Act
+            string validCommandEntry = "rectangle fail fail";
+
+            // Assert
+            Assert.Throws<InvalidCommandEntryException>(() =>
+            {
+                parser.HasValidParametersEntry(validCommandEntry);
+            });
         }
     }
 }

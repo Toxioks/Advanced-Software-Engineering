@@ -250,6 +250,10 @@ public class CommandLibrary
         }
     }
 
+    /// <summary>
+    /// Draws a triangle at the with the 6 specified dimensions, width, height and coordinates.
+    /// </summary>
+    /// <param name="parts">An array containing the Triangle command's specified dimensions. </param>
     public void DrawTriangle(string[] parts)
     {
         if (parts.Length >= 6 && int.TryParse(parts[1], out int radius)

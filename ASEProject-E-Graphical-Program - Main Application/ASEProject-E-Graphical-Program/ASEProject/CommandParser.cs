@@ -125,6 +125,7 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the moveTo command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the moveto command.</param>
         private bool IsValidMoveToParametersEntry(string[] parameters)
         {
             if (parameters.Length != 2)
@@ -136,6 +137,7 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the circle command has required parameters specified. 
         /// </summary>
+        /// /// <param name="parameters">An Array of parameters for the circle command.</param>
         private bool IsValidCircleParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -147,6 +149,7 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the pen command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the pen command.</param>
         private bool IsValidPenParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -159,6 +162,7 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the fill command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the fill command.</param>
         private bool IsValidFillParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -171,17 +175,19 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the rectangle command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the rectangle command.</param>
         private bool IsValidRectangleParametersEntry(string[] parameters)
         {
             if (parameters.Length != 2)
                 return false;
 
             return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
-        } 
+        }
 
         /// <summary>
         /// Validates if a the triangle command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the triangle command.</param>
         private bool IsValidTriangleParametersEntry(string[] parameters)
             {
                 if (parameters.Length != 6)
