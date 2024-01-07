@@ -74,6 +74,9 @@ public class CommandLibrary
             case "rectangle":
                 DrawRectangle(parts);
                 break;
+            case "triangle":
+                DrawTriangle(parts);
+                break;
             default:
                 // Unknown command
                 break;
@@ -247,10 +250,27 @@ public class CommandLibrary
         }
     }
 
-
-
-
-
+    public void DrawTriangle(string[] parts)
+    {
+        if (parts.Length >= 6 && int.TryParse(parts[1], out int radius)
+                       && int.TryParse(parts[2], out int height)
+                                  && int.TryParse(parts[3], out int x2)
+                                             && int.TryParse(parts[4], out int y2))
+        {
+            PointF[] points = new PointF[3];
+            points[0] = new PointF(currentPenPosition.X, currentPenPosition.Y);
+            points[1] = new PointF(radius, height);
+            points[2] = new PointF(x2, y2);
+            if (FillModeTrue)
+            {
+                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
+                {
+                    graphics.FillPolygon(pen.Brush, points);
+                }
+            }
+            graphics.DrawPolygon(pen, points);
+        }
+    }   
 
 
     /// <summary>

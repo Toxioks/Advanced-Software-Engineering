@@ -163,5 +163,25 @@ namespace ApplicationTesting
             // Assert
             Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
         }
+
+        /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the Triangle command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ValidTriangle()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("moveto 100 100");
+            commandEntry.ExecuteCommandEntry("triangle 10 20 30 40 50 60");
+
+
+            // Assert
+            Assert.NotEqual(PointF.Empty, commandEntry.GetCurrentPosition());
+        }
+
     }
 }

@@ -48,6 +48,7 @@ namespace ASEProject
                 {"pen", new CommandPenColor()},
                 {"fill", new CommandFill()},
                 {"rectangle", new CommandRectangle()},
+                {"triangle", new CommandTriangle()},
             };
         }
 
@@ -174,7 +175,7 @@ namespace ASEProject
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
             Process openLink = new Process();
-
+            
             try
             {
                 openLink.StartInfo.UseShellExecute = true;

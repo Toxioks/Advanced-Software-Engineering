@@ -30,6 +30,7 @@ namespace ASEProject
             "pen",
             "fill",
             "rectangle",
+            "triangle",
         };
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace ASEProject
             }
             else if (parts.Length < 2)
             {
-                throw new InvalidCommandEntryException("Command is missing parameters.");
+                throw new InvalidCommandEntryException("Error: Command is missing parameters.");
             }
 
             string action = parts[0].ToLower();
@@ -96,6 +97,10 @@ namespace ASEProject
                     break;
                 case "rectangle":
                     if (!IsValidRectangleParametersEntry(parameters))
+                        throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
+                    break;
+                case "triangle":
+                    if (!IsValidTriangleParametersEntry(parameters))
                         throw new InvalidCommandEntryException($"Invalid parameters for {action} command.");
                     break;
                 // Invalid Command Exception
@@ -172,8 +177,19 @@ namespace ASEProject
                 return false;
 
             return int.TryParse(parameters[0], out _) && int.TryParse(parameters[1], out _);
+        } 
+
+        /// <summary>
+        /// Validates if a the triangle command has required parameters specified. 
+        /// </summary>
+        private bool IsValidTriangleParametersEntry(string[] parameters)
+            {
+                if (parameters.Length != 6)
+                    return false;
+
+                return parameters.All(param => int.TryParse(param, out _));
         }
 
-    }
+        }
 
 }

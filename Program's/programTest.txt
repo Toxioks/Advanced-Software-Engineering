@@ -1,0 +1,7 @@
+clear
+moveto 300 300
+Circle 250 
+pen gold
+rectangle 100 200
+fill off
+circle 100
