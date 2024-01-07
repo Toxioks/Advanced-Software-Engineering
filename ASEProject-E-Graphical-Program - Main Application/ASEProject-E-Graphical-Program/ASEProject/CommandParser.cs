@@ -39,6 +39,11 @@ namespace ASEProject
         /// <param name="command">The string that contains the command to validate.</param>
         public bool IsValidCommandEntry(string command)
         {
+            if (VariableIsDeclared(command))
+            {
+                return true;
+            }
+
             string[] parts = command.Split(' ');
 
             if (parts.Length == 0)
@@ -189,13 +194,46 @@ namespace ASEProject
         /// </summary>
         /// <param name="parameters">An Array of parameters for the triangle command.</param>
         private bool IsValidTriangleParametersEntry(string[] parameters)
+        {
+            if (parameters.Length != 6)
+                return false;
+
+            return parameters.All(param => int.TryParse(param, out _));
+        }
+
+        public bool VariableIsDeclared(string command)
+        {
+            var parts = command.Split(' ');
+
+            if (parts.Length == 2)
             {
-                if (parameters.Length != 6)
-                    return false;
+                return false;
+            }
 
-                return parameters.All(param => int.TryParse(param, out _));
+            var variableName = parts[0].Trim();
+            var variableValue = parts[1].Trim();
+
+            return VariableIsDeclaredTrue(variableName) && int.TryParse(variableValue, out _);
         }
 
+        private bool VariableIsDeclaredTrue(string variableName)
+        {
+            return !string.IsNullOrEmpty(variableName) && variableName.All(char.IsLetter);
         }
 
+        public string GetVariableName(string command, CommandLibrary commandEntryList)
+        {
+            var parts = command.Split(' ');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (commandEntryList.IsVariableName(parts[i]))
+                {
+                    return parts[i] = commandEntryList.TryGetVariable(parts[i]).ToString();
+                }
+            }
+            
+            return string.Join(" ", parts);
+        }
+            
+    }
 }

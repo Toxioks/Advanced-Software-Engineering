@@ -12,6 +12,7 @@ public class CommandLibrary
     private Graphics graphics;
     private Pen pen;
     private PointF currentPenPosition;
+    private Dictionary<string, int> keyVariable;
 
     /// <summary>
     /// Creates a new instance of the CommandLibrary class with the required object.
@@ -275,6 +276,41 @@ public class CommandLibrary
             graphics.DrawPolygon(pen, points);
         }
     }   
+
+    public void variable(string variableName, int valueVariable)
+    {
+        keyVariable[variableName] = valueVariable;
+    }
+    public int TryGetVariable(string variableName)
+    {
+        if (keyVariable.TryGetValue(variableName, out int valueVariable))
+        {
+            return valueVariable;
+        }
+        else
+        {
+            throw new ArgumentException($"Variable {variableName} cannot be found");
+        }
+    }
+
+    public void DisplayVariable(string variableName)
+    {
+        if (keyVariable.TryGetValue(variableName, out int valueVariable))
+        {
+            Console.WriteLine($"Variable {variableName} contains {valueVariable}");
+            MessageBox.Show($"Variable '{variableName}' contains: {valueVariable}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        else
+        {
+            Console.WriteLine($"Variable {variableName} is incorrectly defined: {valueVariable}");
+            MessageBox.Show($"Variable '{variableName}' is incorrectly defined: {valueVariable}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+
+    public bool IsVariableName(string variableName)
+    {
+        return keyVariable.ContainsKey(variableName);
+    }
 
 
     /// <summary>
