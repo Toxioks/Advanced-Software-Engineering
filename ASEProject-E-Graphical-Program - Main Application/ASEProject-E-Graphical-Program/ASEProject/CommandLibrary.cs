@@ -12,7 +12,7 @@ public class CommandLibrary
     private Graphics graphics;
     private Pen pen;
     private PointF currentPenPosition;
-    private Dictionary<string, int> userVariable;
+    private Dictionary<string, int> keyVariable;
 
     /// <summary>
     /// Creates a new instance of the CommandLibrary class with the required object.
@@ -23,7 +23,7 @@ public class CommandLibrary
         this.graphics = graphics;
         pen = new Pen(Color.BlueViolet);
         currentPenPosition = PointF.Empty;
-        userVariable = new Dictionary<string, int>();
+        keyVariable = new Dictionary<string, int>();
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class CommandLibrary
             {
                 MessageBox.Show($"Using radius: {radius}", "Debugger", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (userVariable.TryGetValue(parts[1], out radius))
+            else if (keyVariable.TryGetValue(parts[1], out radius))
             {
                 MessageBox.Show($"Variable: '{parts[1]}' for value: {radius}", "Debugger", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -304,9 +304,9 @@ public class CommandLibrary
     /// </summary>
     /// <param name="variableName">The name of the variable to modify or update.</param>
     /// <param name="value">The value/data to assign to the specified variable.</param>
-    public void variable(string variableName, int value)
+    public void Variable(string variableName, int value)
     {
-        userVariable[variableName] = value;
+        keyVariable[variableName] = value;
     }
 
     /// <summary>
@@ -315,7 +315,7 @@ public class CommandLibrary
     /// <param name="variableName">The specified name of the variable to retrieve .</param>
     public int TryGetVariable(string variableName)
     {
-        if (userVariable.TryGetValue(variableName, out int value))
+        if (keyVariable.TryGetValue(variableName, out int value))
         {
             return value;
         }
@@ -327,7 +327,7 @@ public class CommandLibrary
 
     public void DisplayVariable(string variableName)
     {
-        if (userVariable.TryGetValue(variableName, out int value))
+        if (keyVariable.TryGetValue(variableName, out int value))
         {
             Console.WriteLine($"Variable {variableName} contains {value}");
             MessageBox.Show($"Variable '{variableName}' contains: {value}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -345,7 +345,7 @@ public class CommandLibrary
     /// <param name="variableName">The specified name of the variable to retrieve .</param>
     public bool IsVariableName(string variableName)
     {
-        return userVariable.ContainsKey(variableName);
+        return keyVariable.ContainsKey(variableName);
     }
 
 

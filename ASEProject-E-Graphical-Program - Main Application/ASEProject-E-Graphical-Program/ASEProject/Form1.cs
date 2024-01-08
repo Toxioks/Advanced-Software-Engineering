@@ -268,7 +268,7 @@ namespace ASEProject
                 var parts = command.Split('=');
                 string variableName = parts[0].Trim();
                 int value = MathmaticEvaluation(parts[1].Trim());
-                commandEntryList.variable(variableName, value);
+                commandEntryList.Variable(variableName, value);
             }
             else
             {

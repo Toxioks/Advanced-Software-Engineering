@@ -5,6 +5,7 @@ using ASEProject;
 using System.Reflection;
 using System.Drawing.Drawing2D;
 using System.Security.Cryptography.X509Certificates;
+using static ASEProject.Form1;
 
 /// <summary>
 /// This class provides Unit testing using the CommandParserTesting class, 
@@ -45,7 +46,7 @@ namespace ApplicationTesting
             string invalidCommand = "False 510 150";
 
             //Assert
-            Assert.Throws<InvalidCommandEntryException>(() =>
+            Assert.Throws<CustomInvalidCommandEntryException>(() =>
             {
                 parser.IsValidCommandEntry(invalidCommand);
             });
@@ -81,7 +82,7 @@ namespace ApplicationTesting
             string validCommandEntry = "rectangle fail fail";
 
             // Assert
-            Assert.Throws<InvalidCommandEntryException>(() =>
+            Assert.Throws<CustomInvalidCommandEntryException>(() =>
             {
                 parser.HasValidParametersEntry(validCommandEntry);
             });

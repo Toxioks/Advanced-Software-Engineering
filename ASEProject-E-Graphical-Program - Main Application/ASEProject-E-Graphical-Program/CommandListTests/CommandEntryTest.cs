@@ -15,6 +15,23 @@ namespace ApplicationTesting
     public class CommandEntryTest
     {
         /// <summary>
+        /// Calls ExecuteCommandEntry method and handles the Invalid command.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_InvalidCommand()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("invalid");
+
+            // Assert
+            Assert.Equal(new PointF(0, 0), commandEntry.GetCurrentPosition());
+        }
+
+        /// <summary>
         /// Calls ExecuteCommandEntry method and handles the DrawTo command.
         /// </summary>
         [Fact]
@@ -181,6 +198,119 @@ namespace ApplicationTesting
 
             // Assert
             Assert.NotEqual(PointF.Empty, commandEntry.GetCurrentPosition());
+        }
+
+        /// <summary>
+        /// Test's the <see cref="CommandLibrary.Variable(string, int)"/> method.
+        /// </summary>
+        [Fact]
+        public void SetVariable()
+        {
+            // Arrange
+            var commandEntryList = new CommandLibrary(Graphics.FromImage(new Bitmap(1, 1)));
+            commandEntryList.Variable("x", 10);
+
+            //Act
+            int size = commandEntryList.TryGetVariable("x");
+
+            // Assert
+            Assert.Equal(10, size);
+        }
+
+        /// <summary>
+        /// Test's the <see cref="CommandLibrary.Variable(string, int)"/> method for failure.
+        /// </summary>
+        [Fact]
+        public void SetVariable_Invalid()
+        {
+            // Arrange
+            var commandEntryList = new CommandLibrary(Graphics.FromImage(new Bitmap(1, 1)));
+            commandEntryList.Variable("x", 10);
+
+            //Act
+            int size = commandEntryList.TryGetVariable("y");
+
+            // Assert
+            Assert.Equal(0, size);
+        }
+
+        /// <summary>
+        /// Test's the <see cref="CommandLibrary.CommandLoop(string command)"/> method.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_Loop()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("loop 5");
+            commandEntry.ExecuteCommandEntry("moveto 100 100");
+            commandEntry.ExecuteCommandEntry("drawto 50 50");
+            commandEntry.ExecuteCommandEntry("endloop");
+
+            // Assert
+            Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
+
+        }
+
+        /// <summary>
+        /// Test's the <see cref="CommandLibrary.CommandLoop(string command)"/> method for failure.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_Loop_Invalid()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+
+            // Act
+            commandEntry.ExecuteCommandEntry("loop 5");
+            commandEntry.ExecuteCommandEntry("moveto 100 100");
+            commandEntry.ExecuteCommandEntry("drawto 50 50");
+            commandEntry.ExecuteCommandEntry("endloop");
+
+            // Assert
+            Assert.Equal(new PointF(0, 0), commandEntry.GetCurrentPosition());
+
+        }
+
+        /// <summary>
+        /// Test's the conditional executions of commands using the conditional "if" statement.
+        /// </summary>
+        [Fact]
+        public void ExecuteCommandEntry_ConditionalIfStatement()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+            commandEntry.ExecuteCommandEntry("size = 50");
+
+            // Act
+            commandEntry.ExecuteCommandEntry("if size > 10");
+            commandEntry.ExecuteCommandEntry("drawto 50 50");
+            commandEntry.ExecuteCommandEntry("endif");
+
+            // Assert
+            Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
+        }
+
+        [Fact]
+        public void ExecuteCommandEntry_ConditionalIfStatement_Invalid()
+        {
+            // Arrange
+            var graphics = Graphics.FromImage(new Bitmap(1, 1));
+            var commandEntry = new CommandLibrary(graphics);
+            commandEntry.ExecuteCommandEntry("size = 50");
+
+            // Act
+            commandEntry.ExecuteCommandEntry("if size > 100");
+            commandEntry.ExecuteCommandEntry("drawto 50 50");
+            commandEntry.ExecuteCommandEntry("endif");
+
+            // Assert
+            Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
         }
 
     }
