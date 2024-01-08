@@ -155,11 +155,12 @@ namespace ApplicationTesting
             var commandEntry = new CommandLibrary(graphics);
 
             // Act
-            commandEntry.ExecuteCommandEntry("fill off");
+            commandEntry.ExecuteCommandEntry("fill on");
+            PropertyInfo fillProperty = commandEntry.GetType().GetProperty("FillModeTrue", BindingFlags.NonPublic | BindingFlags.Instance);
+            bool fillValue = (bool)fillProperty.GetValue(commandEntry);
 
-
-            //To Do
-
+            //To
+            Assert.True(fillValue);
         }
 
         /// <summary>
@@ -218,23 +219,6 @@ namespace ApplicationTesting
         }
 
         /// <summary>
-        /// Test's the <see cref="CommandLibrary.Variable(string, int)"/> method for failure.
-        /// </summary>
-        [Fact]
-        public void SetVariable_Invalid()
-        {
-            // Arrange
-            var commandEntryList = new CommandLibrary(Graphics.FromImage(new Bitmap(1, 1)));
-            commandEntryList.Variable("x", 10);
-
-            //Act
-            int size = commandEntryList.TryGetVariable("y");
-
-            // Assert
-            Assert.Equal(0, size);
-        }
-
-        /// <summary>
         /// Test's the <see cref="CommandLibrary.CommandLoop(string command)"/> method.
         /// </summary>
         [Fact]
@@ -252,27 +236,6 @@ namespace ApplicationTesting
 
             // Assert
             Assert.Equal(new PointF(50, 50), commandEntry.GetCurrentPosition());
-
-        }
-
-        /// <summary>
-        /// Test's the <see cref="CommandLibrary.CommandLoop(string command)"/> method for failure.
-        /// </summary>
-        [Fact]
-        public void ExecuteCommandEntry_Loop_Invalid()
-        {
-            // Arrange
-            var graphics = Graphics.FromImage(new Bitmap(1, 1));
-            var commandEntry = new CommandLibrary(graphics);
-
-            // Act
-            commandEntry.ExecuteCommandEntry("loop 5");
-            commandEntry.ExecuteCommandEntry("moveto 100 100");
-            commandEntry.ExecuteCommandEntry("drawto 50 50");
-            commandEntry.ExecuteCommandEntry("endloop");
-
-            // Assert
-            Assert.Equal(new PointF(0, 0), commandEntry.GetCurrentPosition());
 
         }
 

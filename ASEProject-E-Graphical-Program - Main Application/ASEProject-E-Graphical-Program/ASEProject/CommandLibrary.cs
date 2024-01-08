@@ -325,20 +325,6 @@ public class CommandLibrary
         }
     }
 
-    public void DisplayVariable(string variableName)
-    {
-        if (keyVariable.TryGetValue(variableName, out int value))
-        {
-            Console.WriteLine($"Variable {variableName} contains {value}");
-            MessageBox.Show($"Variable '{variableName}' contains: {value}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        else
-        {
-            Console.WriteLine($"Variable {variableName} is incorrectly defined: {value}");
-            MessageBox.Show($"Variable '{variableName}' is incorrectly defined: {value}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    }
-
     /// <summary>
     /// Attempts to confirm the specified variable name exists. Returns true if it does, false if it doesn't.
     /// </summary>
@@ -347,7 +333,6 @@ public class CommandLibrary
     {
         return keyVariable.ContainsKey(variableName);
     }
-
 
     /// <summary>
     /// Gets or sets the fill mode for drawings. If true, the drawing will be filled. If false, the drawing will be outlined.

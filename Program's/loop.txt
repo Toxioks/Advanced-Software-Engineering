@@ -1,0 +1,11 @@
+x = 100
+loop 3
+moveto x 250
+drawto 200 300
+pen red
+moveto 200 100
+circle 55
+pen black
+moveto x 500
+triangle 150 250 400 250 700 200
+endloop

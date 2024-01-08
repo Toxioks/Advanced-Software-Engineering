@@ -1,0 +1,4 @@
+size = 100
+xCoords = 500
+yCoords = 400
+circle size

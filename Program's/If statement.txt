@@ -1,0 +1,5 @@
+x = 10
+if x > 1
+moveto 500 500
+circle 100
+endif
