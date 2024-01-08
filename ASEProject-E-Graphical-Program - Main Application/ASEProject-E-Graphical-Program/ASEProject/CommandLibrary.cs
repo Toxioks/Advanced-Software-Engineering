@@ -12,7 +12,7 @@ public class CommandLibrary
     private Graphics graphics;
     private Pen pen;
     private PointF currentPenPosition;
-    private Dictionary<string, int> keyVariable;
+    private Dictionary<string, int> userVariable;
 
     /// <summary>
     /// Creates a new instance of the CommandLibrary class with the required object.
@@ -23,6 +23,7 @@ public class CommandLibrary
         this.graphics = graphics;
         pen = new Pen(Color.BlueViolet);
         currentPenPosition = PointF.Empty;
+        userVariable = new Dictionary<string, int>();
     }
 
     /// <summary>
@@ -90,8 +91,10 @@ public class CommandLibrary
     /// <param name="parts">An array containing the drawTo command's X & Y coordinates.</param>
     public void DrawTo(string[] parts)
     {
-        if (parts.Length >= 3 && int.TryParse(parts[1], out int x) && int.TryParse(parts[2], out int y))
+        if (parts.Length >= 3)
         {
+            int x = int.TryParse(parts[1], out var num) ? num : TryGetVariable(parts[1]);
+            int y = int.TryParse(parts[2], out num) ? num : TryGetVariable(parts[2]);
             PointF endPoint = new PointF(x, y);
             graphics.DrawLine(pen, currentPenPosition, endPoint);
             currentPenPosition = endPoint;
@@ -104,8 +107,10 @@ public class CommandLibrary
     /// <param name="parts">An array containing the circle command's created using the specified radius</param>
     public void MoveTo(string[] parts)
     {
-        if (parts.Length >= 3 && int.TryParse(parts[1], out int x) && int.TryParse(parts[2], out int y))
+        if (parts.Length >= 3)
         {
+            int x = int.TryParse(parts[1], out var num) ? num : TryGetVariable(parts[1]);
+            int y = int.TryParse(parts[2], out num) ? num : TryGetVariable(parts[2]);
             currentPenPosition = new PointF(x, y);
         }
     }
@@ -116,18 +121,37 @@ public class CommandLibrary
     /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
     public void DrawCircle(string[] parts)
     {
-        if (parts.Length >= 2 && int.TryParse(parts[1], out int radius))
+        if (parts.Length >= 2)
         {
+            int radius;
+
+            if (int.TryParse(parts[1], out radius))
+            {
+                MessageBox.Show($"Using direct value for radius: {radius}", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (userVariable.TryGetValue(parts[1], out radius))
+            {
+                MessageBox.Show($"Using variable '{parts[1]}' for radius, value: {radius}", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Radius value or variable '{parts[1]}' not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             float diameter = radius * 2;
-            RectangleF rect = new RectangleF(currentPenPosition.X, currentPenPosition.Y, diameter, diameter);
+            RectangleF rect = new RectangleF(currentPenPosition.X - radius, currentPenPosition.Y - radius, diameter, diameter);
+
+            // Drawing logic
             if (FillModeTrue)
             {
-                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
-                {
-                    graphics.FillEllipse(pen.Brush, rect);
-                }
+                graphics.FillEllipse(pen.Brush, rect);
             }
-            graphics.DrawEllipse(pen, Rectangle.Round(rect));
+            graphics.DrawEllipse(pen, rect);
+        }
+        else
+        {
+            MessageBox.Show("Invalid command format for 'circle'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -237,15 +261,14 @@ public class CommandLibrary
     /// <param name="parts">An array containing the Rectangle command's specified X & Y input.</param>
     public void DrawRectangle(string[] parts)
     {
-        if (parts.Length >= 3 && int.TryParse(parts[1], out int width) && int.TryParse(parts[2], out int height))
+        if (parts.Length >= 3)
         {
+            int width = int.TryParse(parts[1], out var num) ? num : TryGetVariable(parts[1]);
+            int height = int.TryParse(parts[2], out num) ? num : TryGetVariable(parts[2]);
             RectangleF rect = new RectangleF(currentPenPosition.X, currentPenPosition.Y, width, height);
             if (FillModeTrue)
             {
-                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
-                {
-                    graphics.FillRectangle(pen.Brush, rect);
-                }
+                graphics.FillRectangle(pen.Brush, rect);
             }
             graphics.DrawRectangle(pen, Rectangle.Round(rect));
         }
@@ -257,35 +280,33 @@ public class CommandLibrary
     /// <param name="parts">An array containing the Triangle command's specified dimensions. </param>
     public void DrawTriangle(string[] parts)
     {
-        if (parts.Length >= 6 && int.TryParse(parts[1], out int radius)
-                       && int.TryParse(parts[2], out int height)
-                                  && int.TryParse(parts[3], out int x2)
-                                             && int.TryParse(parts[4], out int y2))
+        if (parts.Length >= 6)
         {
-            PointF[] points = new PointF[3];
-            points[0] = new PointF(currentPenPosition.X, currentPenPosition.Y);
-            points[1] = new PointF(radius, height);
-            points[2] = new PointF(x2, y2);
+            int x1 = int.TryParse(parts[1], out var numX1) ? numX1 : TryGetVariable(parts[1]);
+            int y1 = int.TryParse(parts[2], out var numY1) ? numY1 : TryGetVariable(parts[2]);
+            int x2 = int.TryParse(parts[3], out var numX2) ? numX2 : TryGetVariable(parts[3]);
+            int y2 = int.TryParse(parts[4], out var numY2) ? numY2 : TryGetVariable(parts[4]);
+            int x3 = int.TryParse(parts[5], out var numX3) ? numX3 : TryGetVariable(parts[5]);
+            int y3 = int.TryParse(parts[6], out var numY3) ? numY3 : TryGetVariable(parts[6]);
+
+            PointF[] points = { new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3) };
             if (FillModeTrue)
             {
-                if (pen.Brush != null && pen.Brush != Brushes.Transparent)
-                {
-                    graphics.FillPolygon(pen.Brush, points);
-                }
+                graphics.FillPolygon(pen.Brush, points);
             }
             graphics.DrawPolygon(pen, points);
         }
     }   
 
-    public void variable(string variableName, int valueVariable)
+    public void variable(string variableName, int value)
     {
-        keyVariable[variableName] = valueVariable;
+        userVariable[variableName] = value;
     }
     public int TryGetVariable(string variableName)
     {
-        if (keyVariable.TryGetValue(variableName, out int valueVariable))
+        if (userVariable.TryGetValue(variableName, out int value))
         {
-            return valueVariable;
+            return value;
         }
         else
         {
@@ -295,21 +316,21 @@ public class CommandLibrary
 
     public void DisplayVariable(string variableName)
     {
-        if (keyVariable.TryGetValue(variableName, out int valueVariable))
+        if (userVariable.TryGetValue(variableName, out int value))
         {
-            Console.WriteLine($"Variable {variableName} contains {valueVariable}");
-            MessageBox.Show($"Variable '{variableName}' contains: {valueVariable}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Console.WriteLine($"Variable {variableName} contains {value}");
+            MessageBox.Show($"Variable '{variableName}' contains: {value}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
-            Console.WriteLine($"Variable {variableName} is incorrectly defined: {valueVariable}");
-            MessageBox.Show($"Variable '{variableName}' is incorrectly defined: {valueVariable}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Console.WriteLine($"Variable {variableName} is incorrectly defined: {value}");
+            MessageBox.Show($"Variable '{variableName}' is incorrectly defined: {value}", "value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 
     public bool IsVariableName(string variableName)
     {
-        return keyVariable.ContainsKey(variableName);
+        return userVariable.ContainsKey(variableName);
     }
 
 
@@ -323,11 +344,5 @@ public class CommandLibrary
         return currentPenPosition;
     }
 
-    /// <summary>
-    /// Creates a new instance of the CommandList class without a object. Used for testing purposes.
-    /// </summary>
-    public CommandLibrary()
-    {
 
-    }
 }

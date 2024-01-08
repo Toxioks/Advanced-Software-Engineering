@@ -31,6 +31,8 @@ namespace ASEProject
             "fill",
             "rectangle",
             "triangle",
+            "if",
+            "endif",
         };
 
         /// <summary>
@@ -221,19 +223,93 @@ namespace ASEProject
             return !string.IsNullOrEmpty(variableName) && variableName.All(char.IsLetter);
         }
 
-        public string GetVariableName(string command, CommandLibrary commandEntryList)
+        public string VariableNameReplacement(string command, CommandLibrary commandEntryList)
         {
             var parts = command.Split(' ');
             for (int i = 0; i < parts.Length; i++)
             {
                 if (commandEntryList.IsVariableName(parts[i]))
                 {
-                    return parts[i] = commandEntryList.TryGetVariable(parts[i]).ToString();
+                    parts[i] = commandEntryList.TryGetVariable(parts[i]).ToString();
                 }
             }
-            
             return string.Join(" ", parts);
         }
-            
-    }
+
+
+        public bool VariableIsDeclaredOrMathmatic(string command)
+        {
+            var parts = command.Split('=');
+            if (parts.Length != 2)
+            {
+                return false;
+            }
+            var variableName = parts[0].Trim();
+            var variableParam = parts[1].Trim();
+
+            if(int.TryParse(variableParam, out _) || VariableIsDeclaredTrue(variableParam))
+            {
+                return VariableIsDeclaredTrue(variableName);
+            }
+            else
+            {
+                return VariableIsDeclaredTrue(variableName) && VariableIsMathmatic(variableParam);
+            }
+        }
+
+        private bool VariableIsMathmatic(string expression)
+        {
+            char[] operators = { '+', '-', '*', '/' };
+            var parts = expression.Split(operators);
+
+            foreach (var part in parts)
+            {
+                string partTrimmed = part.Trim();
+                if (!int.TryParse(partTrimmed, out _) && VariableIsDeclaredTrue(partTrimmed))
+                {
+                    return false;
+                }
+            }
+            return parts.Length > 1;
+        }
+
+        public bool ConditionalCommand(string command)
+        {
+            string[] parts = command.Split(' ');
+            return parts.Length > 0 && (parts[0].ToLower() == "if" || parts[0].ToLower() == "endif");
+        }
+
+        public bool ValidConditionalCommand(string command, CommandLibrary commandEntryList)
+        {
+            string[] parts = command.Split(' ');
+            if (parts[0].ToLower() == "if")
+            {
+                if (parts.Length != 4) return false;
+
+                string variable = parts[1];
+                string operation = parts[2];
+                string value = parts[3];
+
+                if (!commandEntryList.IsVariableName(variable)) return false;
+
+                if (!(operation == ">" || operation == "<" || operation == "==")) return false;
+
+
+                return int.TryParse(value, out _);
+            }
+            else if (parts[0].ToLower() == "endif")
+            {
+                return parts.Length == 1;
+            }
+            return false;
+        }
+
+        public bool CommandLoop(string command)
+        {
+            string[] parts = command.Split(' ');
+            return parts.Length > 0 && (parts[0].ToLower() == "loop" || parts[0].ToLower() == "endloop");
+        }
+
+    }     
+        
 }
