@@ -5,14 +5,6 @@ using System.Linq;
 namespace ASEProject
 {
     /// <summary>
-    /// Exception thrown when an entered command is invalid. 
-    /// </summary>
-    public class InvalidCommandEntryException : Exception
-    {
-        public InvalidCommandEntryException(string message) : base(message) { }
-    }
-
-    /// <summary>
     /// The class responsible for parsing and validating entered commands. 
     /// </summary>
     public class CommandParser
@@ -39,6 +31,7 @@ namespace ASEProject
         /// Authorises call if the command is found within ValidCommandEntry list.
         /// </summary>
         /// <param name="command">The string that contains the command to validate.</param>
+        /// <returns>True if the command is valid/specified command, false if not.</returns>
         public bool IsValidCommandEntry(string command)
         {
             if (VariableIsDeclared(command))
@@ -62,6 +55,7 @@ namespace ASEProject
         /// Validates if a command has required parameters specified. 
         /// </summary>
         /// <param name="command">The string that contains the command to validate.</param>
+        /// <returns> True if specified command has valid parameters, false if not.</returns>
         public bool HasValidParametersEntry(string command)
         {
             string[] parts = command.Split(' ');
@@ -121,6 +115,8 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the drawTo command has required parameters specified. 
         /// </summary>
+        /// <param name="parameters">An Array of parameters for the drawTo command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns></returns>
         private bool IsValidDrawToParametersEntry(string[] parameters)
         {
             if (parameters.Length != 2)
@@ -133,6 +129,7 @@ namespace ASEProject
         /// Validates if a the moveTo command has required parameters specified. 
         /// </summary>
         /// <param name="parameters">An Array of parameters for the moveto command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidMoveToParametersEntry(string[] parameters)
         {
             if (parameters.Length != 2)
@@ -144,7 +141,8 @@ namespace ASEProject
         /// <summary>
         /// Validates if a the circle command has required parameters specified. 
         /// </summary>
-        /// /// <param name="parameters">An Array of parameters for the circle command.</param>
+        /// <param name="parameters">An Array of parameters for the circle command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidCircleParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -157,6 +155,7 @@ namespace ASEProject
         /// Validates if a the pen command has required parameters specified. 
         /// </summary>
         /// <param name="parameters">An Array of parameters for the pen command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidPenParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -170,6 +169,7 @@ namespace ASEProject
         /// Validates if a the fill command has required parameters specified. 
         /// </summary>
         /// <param name="parameters">An Array of parameters for the fill command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidFillParametersEntry(string[] parameters)
         {
             if (parameters.Length != 1)
@@ -183,6 +183,7 @@ namespace ASEProject
         /// Validates if a the rectangle command has required parameters specified. 
         /// </summary>
         /// <param name="parameters">An Array of parameters for the rectangle command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidRectangleParametersEntry(string[] parameters)
         {
             if (parameters.Length != 2)
@@ -195,6 +196,7 @@ namespace ASEProject
         /// Validates if a the triangle command has required parameters specified. 
         /// </summary>
         /// <param name="parameters">An Array of parameters for the triangle command.</param>
+        /// <returns>True if specified command has valid parameters, false if not.</returns>
         private bool IsValidTriangleParametersEntry(string[] parameters)
         {
             if (parameters.Length != 6)
@@ -203,6 +205,11 @@ namespace ASEProject
             return parameters.All(param => int.TryParse(param, out _));
         }
 
+        /// <summary>
+        /// Checks if the specified command is a correctly formatted variable declaration.
+        /// </summary>
+        /// <param name="command">The command variables to declare.</param>
+        /// <returns>True if the command is a variable declaration, false if not.</returns>
         public bool VariableIsDeclared(string command)
         {
             var parts = command.Split(' ');
@@ -218,11 +225,22 @@ namespace ASEProject
             return VariableIsDeclaredTrue(variableName) && int.TryParse(variableValue, out _);
         }
 
+        /// <summary>
+        /// Checks if the specified variable is a correctly formatted and vailidates.
+        /// </summary>
+        /// <param name="command">The variables to declare.</param>
+        /// <returns>True if the variable declaration is valid, false if not.</returns>
         private bool VariableIsDeclaredTrue(string variableName)
         {
             return !string.IsNullOrEmpty(variableName) && variableName.All(char.IsLetter);
         }
 
+        /// <summary>
+        /// Checks if the specified variable is a correctly and replaces the variable with the value.
+        /// </summary>
+        /// <param name="command">The string of commands that hold the variables.</param>
+        /// <param name="commandEntryList">The list to which this command belongs to.</param>
+        /// <returns>A string of commands with replaced variable values.</returns>
         public string VariableNameReplacement(string command, CommandLibrary commandEntryList)
         {
             var parts = command.Split(' ');
@@ -236,7 +254,11 @@ namespace ASEProject
             return string.Join(" ", parts);
         }
 
-
+        /// <summary>
+        /// Checks if the the specified command is a variable declaraton or mathmatic.
+        /// </summary>
+        /// <param name="command">The specified command to validate.</param>
+        /// <returns>True if the specified command is a variable declaration or mathmatic, false if not.</returns>
         public bool VariableIsDeclaredOrMathmatic(string command)
         {
             var parts = command.Split('=');
@@ -257,6 +279,11 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Checks if the the specified command is a mathmatic exoression
+        /// </summary>
+        /// <param name="expression">The specified command to validate.</param>
+        /// <returns>True if the specified string is mathmatic, false if not.</returns>
         private bool VariableIsMathmatic(string expression)
         {
             char[] operators = { '+', '-', '*', '/' };
@@ -273,12 +300,23 @@ namespace ASEProject
             return parts.Length > 1;
         }
 
+        /// <summary>
+        /// Checks if the the specified command is a conditional if or endif statement.
+        /// </summary>
+        /// <param name="command">The specified command to validate.</param>
+        /// <returns>True if the specified commandis a conditional statement, false if not.</returns>
         public bool ConditionalCommand(string command)
         {
             string[] parts = command.Split(' ');
             return parts.Length > 0 && (parts[0].ToLower() == "if" || parts[0].ToLower() == "endif");
         }
 
+        /// <summary>
+        /// Syntax validation of the conditional command value.
+        /// </summary>
+        /// <param name="command">The string of commands to validate.</param>
+        /// <param name="commandEntryList">The commandList of variables to validate.</param>
+        /// <returns>True is the command conditions syntax is valid, false if not.</returns>
         public bool ValidConditionalCommand(string command, CommandLibrary commandEntryList)
         {
             string[] parts = command.Split(' ');
@@ -310,6 +348,13 @@ namespace ASEProject
             return parts.Length > 0 && (parts[0].ToLower() == "loop" || parts[0].ToLower() == "endloop");
         }
 
+        /// <summary>
+        /// Exception thrown when an entered command is invalid. 
+        /// </summary>
+        public class InvalidCommandEntryException : Exception
+        {
+            public InvalidCommandEntryException(string message) : base(message) { }
+        }
     }     
         
 }

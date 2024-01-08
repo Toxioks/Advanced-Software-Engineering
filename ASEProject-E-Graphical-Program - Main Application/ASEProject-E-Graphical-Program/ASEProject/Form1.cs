@@ -29,10 +29,44 @@ namespace ASEProject
             ButtonSave.Click += ButtonSave_Click;
         }
 
+        /// <summary>
+        /// A dictionary that contains all the commands.
+        /// </summary>
         private Dictionary<string, ICommand> commandLibrary;
+
+        /// <summary>
+        /// A list that contains all the commands.
+        /// </summary>
         private CommandLibrary commandEntryList;
+
+        /// <summary>
+        /// A parser that contains all the commands.
+        /// </summary>
         private CommandParser commandParser;
 
+        /// <summary>
+        /// A stack that contains all the conditional statements, used to check if the conditional statement is true or false.
+        /// </summary>
+        private Stack<bool> IsConditionalStack = new Stack<bool>();
+
+        /// <summary>
+        /// A variable that contains the value of the loop and it's iterations.
+        /// </summary>
+        private int IntLoopValue = 0;
+
+        /// <summary>
+        /// Specifies if the current command is inside or outside of the loop.
+        /// </summary>
+        private bool insideLoopStatus = false;
+
+        /// <summary>
+        /// A list that stores all the valid commands to be executed.
+        /// </summary>
+        private List<string> validLoopCommands = new List<string>();
+
+        /// <summary>
+        /// A class that handles the custom invalid command entry exception.
+        /// </summary>
         public class CustomInvalidCommandEntryException : Exception
         {
             public CustomInvalidCommandEntryException(string message) : base(message) { }
@@ -57,15 +91,11 @@ namespace ASEProject
             };
         }
 
-        private Stack<bool> IsConditionalStack = new Stack<bool>();
-        private int IntLoopValue = 0;
-        private bool insideLoopStatus = false;
-        private List<string> validLoopCommands = new List<string>();
-
         private bool ExecuteCommand()
         {
             return IsConditionalStack.Count == 0 || IsConditionalStack.Peek();
         }
+
         /// <summary>
         /// Handles the click event for the run button. Executes the command when the user presses the run button.
         /// </summary>
@@ -88,8 +118,9 @@ namespace ASEProject
         }
 
         /// <summary>
-        /// Handles the click event for the run button. Executes the command when the user presses enter.
+        /// Handles the click event for the run button and executes the specified command from the command box.
         /// </summary>
+        /// <param name="commandText">The command to be executed.</param>
         private void ExecuteCommandFromTextBox(string commandText)
         {
             string[] commands = commandText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
@@ -109,6 +140,10 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Handles the loop command event. Checks if the command is a loop command or not and executing.
+        /// </summary>
+        /// <param name="command">The specified command line used to process within the loop</param>
         private void LoopCommandEvent(string command)
         {
             if (command.ToLower() == "endloop")
@@ -123,6 +158,9 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Sends the all specified commands to be executed within the loop.
+        /// </summary>
         private void SendLoopCommands()
         {
             for (int i = 0; i < IntLoopValue; i++)
@@ -134,6 +172,10 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Handles the command processing event. Checks if the command and it's conditions.
+        /// </summary>
+        /// <param name="command">The specified command line to be processed</param>
         private void CommandProcessing(string command)
         {
             if (commandParser.CommandLoop(command))
@@ -150,6 +192,11 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Executes and process's the specified loop command.
+        /// </summary>
+        /// <param name="command">The specified command to be processed within the loop</param>
+        /// <exception cref="CustomInvalidCommandEntryException">Throw's an exception when a condition or syntax is invalid.</exception>
         private void GuideLoopCommand(string command)
         {
             string[] parts = command.Split(' ');
@@ -183,6 +230,11 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Executes and process's the specified conditional command.
+        /// </summary>
+        /// <param name="command">The specified conditional command to process</param>
+        /// <exception cref="CustomInvalidCommandEntryException">Throw's an exception when a condition or syntax is invalid.</exception>
         private void GuideConditionalCommand(string command)
         {
             string[] parts = command.Split(' ');
@@ -204,6 +256,11 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Executes and process's the specified standard command.
+        /// </summary>
+        /// <param name="command">The specified command to process</param>
+        /// <exception cref="CustomInvalidCommandEntryException">Throw's a excepton when a condition or syntax is invalid</exception>
         private void StandardCommandProcessing(string command)
         {
             if (commandParser.VariableIsDeclaredOrMathmatic(command))
@@ -228,6 +285,12 @@ namespace ASEProject
             }
         }
 
+        /// <summary>
+        /// Evaluates the mathmatic expression and returns the value.
+        /// </summary>
+        /// <param name="expression">The expression value to evaluate</param>
+        /// <returns>The value of the mathmatic expression.</returns>
+        /// <exception cref="CustomInvalidCommandEntryException">Throw's a exceptionn when an invalid term or condition is encountered.</exception>
         private int MathmaticEvaluation(string expression)
         {
             string[] data = expression.Split(' ');
@@ -252,6 +315,14 @@ namespace ASEProject
             return number;
         }
 
+        /// <summary>
+        /// Evaluates the specified condition and returns the value.
+        /// </summary>
+        /// <param name="variableValue">The specified variable to evaluate</param>
+        /// <param name="operation">The specified operation to evaluate</param>
+        /// <param name="value">The specified value to evaluate</param>
+        /// <returns>True if the case condition is met, false if not.</returns>
+        /// <exception cref="CustomInvalidCommandEntryException">Throw's a invalid exception when a invalid operation is provided.</exception>
         private bool ConditionEvaluation(string variableValue, string operation, string value)
         {
             int variable = commandEntryList.TryGetVariable(variableValue);
@@ -264,8 +335,14 @@ namespace ASEProject
                     return variable < value2;
                 case "==":
                     return variable == value2;
+                case "!=":
+                    return variable != value2;
+                case "<=":
+                    return variable >= value2;  
+                case ">=":
+                    return variable <= value2;
                 default:
-                    throw new CustomInvalidCommandEntryException($"Error: Operation {operation} not found");
+                    throw new CustomInvalidCommandEntryException($"Error: Operation {operation} not found.");
             }
         }
 
@@ -357,7 +434,6 @@ namespace ASEProject
             }
         }
 
-
         /// <summary>
         /// Removes preet text from the command box when the user clicks on it.
         /// </summary>
@@ -366,6 +442,12 @@ namespace ASEProject
             InputCommandBox.Clear();
         }
 
+        /// <summary>
+        /// Updated the specified pen coordinates when the user clicks on the graphics box.
+        /// </summary>
+        /// <param name="sender">Argument sender</param>
+        /// <param name="e">Where event data is stored</param>
+        /// <returns>The pen object's current position.</returns>
         private void Coordinates_updated(object sender, EventArgs e)
         {
             string Coordinates_updated = Coordinates.Text;

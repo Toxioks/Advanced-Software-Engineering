@@ -102,9 +102,9 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Draw's a circle at the current pen position using the input radius
+    /// Locates the Pen object to the specified coordinates X & Y.
     /// </summary>
-    /// <param name="parts">An array containing the circle command's created using the specified radius</param>
+    /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
     public void MoveTo(string[] parts)
     {
         if (parts.Length >= 3)
@@ -116,26 +116,27 @@ public class CommandLibrary
     }
 
     /// <summary>
-    /// Moves to the Pen to specified coordinates X & Y.
+    /// Draw's a circle with a specified radius.
     /// </summary>
-    /// <param name="parts">An array containing the moveTo command's X & Y coordinates.</param>
+    /// <param name="parts">An array containing the circle command's created using the specified radius</param>
     public void DrawCircle(string[] parts)
     {
         if (parts.Length >= 2)
         {
+
             int radius;
 
             if (int.TryParse(parts[1], out radius))
             {
-                MessageBox.Show($"Using direct value for radius: {radius}", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Using radius: {radius}", "Debugger", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (userVariable.TryGetValue(parts[1], out radius))
             {
-                MessageBox.Show($"Using variable '{parts[1]}' for radius, value: {radius}", "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Variable: '{parts[1]}' for value: {radius}", "Debugger", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Radius value or variable '{parts[1]}' not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Radius value / variable '{parts[1]}' not found", "Debugger Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -277,31 +278,41 @@ public class CommandLibrary
     /// <summary>
     /// Draws a triangle at the with the 6 specified dimensions, width, height and coordinates.
     /// </summary>
-    /// <param name="parts">An array containing the Triangle command's specified dimensions. </param>
+    /// <param name="parts">An array containing the Triangle command's specified dimensions.</param>
     public void DrawTriangle(string[] parts)
     {
         if (parts.Length >= 6)
         {
-            int x1 = int.TryParse(parts[1], out var numX1) ? numX1 : TryGetVariable(parts[1]);
-            int y1 = int.TryParse(parts[2], out var numY1) ? numY1 : TryGetVariable(parts[2]);
-            int x2 = int.TryParse(parts[3], out var numX2) ? numX2 : TryGetVariable(parts[3]);
-            int y2 = int.TryParse(parts[4], out var numY2) ? numY2 : TryGetVariable(parts[4]);
-            int x3 = int.TryParse(parts[5], out var numX3) ? numX3 : TryGetVariable(parts[5]);
-            int y3 = int.TryParse(parts[6], out var numY3) ? numY3 : TryGetVariable(parts[6]);
+            int xOne = int.TryParse(parts[1], out var numXOne) ? numXOne : TryGetVariable(parts[1]);
+            int yOne = int.TryParse(parts[2], out var numYOne) ? numYOne : TryGetVariable(parts[2]);
+            int xTwo = int.TryParse(parts[3], out var numXTwo) ? numXTwo : TryGetVariable(parts[3]);
+            int yTwo = int.TryParse(parts[4], out var numYTwo) ? numYTwo : TryGetVariable(parts[4]);
+            int xThree = int.TryParse(parts[5], out var numXThree) ? numXThree : TryGetVariable(parts[5]);
+            int yThree = int.TryParse(parts[6], out var numYThree) ? numYThree : TryGetVariable(parts[6]);
 
-            PointF[] points = { new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3) };
+            PointF[] points = { new PointF(xOne, yOne), new PointF(xTwo, yTwo), new PointF(xThree, yThree) };
             if (FillModeTrue)
             {
                 graphics.FillPolygon(pen.Brush, points);
             }
             graphics.DrawPolygon(pen, points);
         }
-    }   
+    }
 
+    /// <summary>
+    /// Modifies and updates a set variable with a specified value set by the user.
+    /// </summary>
+    /// <param name="variableName">The name of the variable to modify or update.</param>
+    /// <param name="value">The value/data to assign to the specified variable.</param>
     public void variable(string variableName, int value)
     {
         userVariable[variableName] = value;
     }
+
+    /// <summary>
+    /// Attempts to retrieve the specified variable name and returns the value.
+    /// </summary>
+    /// <param name="variableName">The specified name of the variable to retrieve .</param>
     public int TryGetVariable(string variableName)
     {
         if (userVariable.TryGetValue(variableName, out int value))
@@ -328,6 +339,10 @@ public class CommandLibrary
         }
     }
 
+    /// <summary>
+    /// Attempts to confirm the specified variable name exists. Returns true if it does, false if it doesn't.
+    /// </summary>
+    /// <param name="variableName">The specified name of the variable to retrieve .</param>
     public bool IsVariableName(string variableName)
     {
         return userVariable.ContainsKey(variableName);
@@ -339,6 +354,9 @@ public class CommandLibrary
     /// </summary>
     internal bool FillModeTrue { get; set; } = true;
 
+    /// <summary>
+    /// Gets the current drawing position and returns the current pen position within the PointF graphics object
+    /// </summary>
     public PointF GetCurrentPosition()
     {
         return currentPenPosition;
