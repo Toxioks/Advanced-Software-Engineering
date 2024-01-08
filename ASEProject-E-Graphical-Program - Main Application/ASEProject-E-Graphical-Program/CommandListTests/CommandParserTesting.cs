@@ -87,5 +87,87 @@ namespace ApplicationTesting
                 parser.HasValidParametersEntry(validCommandEntry);
             });
         }
+
+        /// <summary>
+        /// Test's if the CommandParser can successfully parse a valid variable replacement.
+        [Fact]
+        public void VariableNameReplacement_Successful_Replacement()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+            CommandLibrary commandEntryList = new CommandLibrary(null);
+
+            // Act
+            commandEntryList.Variable("x", 50);
+            string firstVariable = "circle x";
+            string secondVariable = parser.VariableNameReplacement(firstVariable, commandEntryList);
+
+            // Assert
+            Assert.Equal("circle 50", secondVariable);
+        }
+
+        /// <summary>
+        /// Test's if the CommandParser can successfully parse a valid conditional command entry.
+        /// </summary>
+        [Fact]
+        public void ConditionalCommand_Successful_IfStatement()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+
+            // Act
+            string validCommandEntry = "if 5 > 1";
+
+            // Assert
+            Assert.True(parser.ConditionalCommand(validCommandEntry));
+        }
+
+        /// <summary>
+        /// Test's if the CommandParser can successfully parse a valid loop command entry.
+        /// </summary>
+        [Fact] 
+        public void CommandLoop_Successful_LoopStatement()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+
+            // Act
+            string validCommandEntry = "loop 5";
+
+            // Assert
+            Assert.True(parser.CommandLoop(validCommandEntry));
+        }
+
+        /// <summary>
+        ///  Test's if the CommandParser can successfully parse a valid variable expression command entry.
+        /// </summary>
+        [Fact]
+        public void VariableIsDeclaredOrMathmatic_Successful_ValidExpression()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+
+            // Act
+            string validCommandEntry = "x = 10 + 10";
+
+            // Assert
+            Assert.True(parser.VariableIsDeclaredOrMathmatic(validCommandEntry));
+        }
+
+        /// <summary>
+        /// Test's if the CommandParser can successfully parse a valid variable declaration command entry.
+        /// </summary>
+        [Fact]
+        public void VariableIsDeclraed_Successful_ValidDeclration()
+        {
+            // Arrange
+            CommandParser parser = new CommandParser();
+
+            // Act
+            string validCommandEntry = "x = 100";
+
+            // Assert
+            Assert.True(parser.VariableIsDeclaredOrMathmatic(validCommandEntry));
+        }
     }
 }
